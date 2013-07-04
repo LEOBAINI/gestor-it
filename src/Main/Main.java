@@ -31,9 +31,7 @@ public class Main {
 	System.out.println(segundos);
 	return segundos;
 	}
-	public static void setearBarra(MenuPpal menu,int valor){
-		menu.setJProgressBar(valor);
-	}
+	
 	public static void volverAempezar(){
 		
 	}

@@ -48,7 +48,6 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemPcModif = null;
 	private JMenuItem jMenuItemImpresorasModif = null;
 	private JMenuItem jMenuItemHandHeldsModif = null;
-	private JToolBar jToolBar = null;
 	private JMenu jMenuArchivo1 = null;
 	private JMenuItem jMenuItemSalir = null;
 	private JMenu jMenuReasignaciones = null;
@@ -84,7 +83,6 @@ public class MenuPpal extends JFrame {
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.setName("PanelPpal");
-			jContentPane.add(getJToolBar(), null);
 		}
 		return jContentPane;
 	}
@@ -391,25 +389,6 @@ public class MenuPpal extends JFrame {
 			jMenuItemHandHeldsModif.setText("HandHelds");
 		}
 		return jMenuItemHandHeldsModif;
-	}
-
-	/**
-	 * This method initializes jToolBar	
-	 * 	
-	 * @return javax.swing.JToolBar	
-	 */
-	private JToolBar getJToolBar() {
-		if (jToolBar == null) {
-			jToolBar = new JToolBar();
-			jToolBar.setBounds(new Rectangle(3, 288, 708, 27));
-		}
-		return jToolBar;
-	}
-
-	public void setJProgressBar(int valor) {
-		jProgressBar.setValue(valor);
-		jProgressBar.setStringPainted(true);
-		
 	}
 
 	/**
