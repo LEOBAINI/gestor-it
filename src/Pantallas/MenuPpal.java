@@ -52,6 +52,11 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemSalir = null;
 	private JMenu jMenuReasignaciones = null;
 	private JMenu jMenuConsultas = null;
+	private JMenuItem jMenuItemBAM = null;
+	private JMenuItem jMenuItemChip = null;
+	private JMenuItem jMenuItemModifBAM = null;
+	private JMenuItem jMenuItemModifChip = null;
+	private JMenuItem jMenuItemBam = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -67,9 +72,10 @@ public class MenuPpal extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(722, 366);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Menú principal");
+		this.setTitle("Menú principal                                                                                                                                                                                                  por Leonardo Baini");
 		 
 	}
 
@@ -159,6 +165,7 @@ public class MenuPpal extends JFrame {
 			jMenuInventario.add(getJMenuItemNtb());
 			jMenuInventario.add(getJMenuItemImpresoras());
 			jMenuInventario.add(getJMenuItemHandheld());
+			jMenuInventario.add(getJMenuItemBam());
 		}
 		return jMenuInventario;
 	}
@@ -243,6 +250,8 @@ public class MenuPpal extends JFrame {
 			jMenuAltas2.add(getJMenuItemPCyNTB());
 			jMenuAltas2.add(getJMenuItemImpresoras2());
 			jMenuAltas2.add(getJMenuItemHandHelds());
+			jMenuAltas2.add(getJMenuItemBAM());
+			jMenuAltas2.add(getJMenuItemChip());
 		}
 		return jMenuAltas2;
 	}
@@ -259,6 +268,8 @@ public class MenuPpal extends JFrame {
 			jMenuModificaciones.add(getJMenuItemPcModif());
 			jMenuModificaciones.add(getJMenuItemImpresorasModif());
 			jMenuModificaciones.add(getJMenuItemHandHeldsModif());
+			jMenuModificaciones.add(getJMenuItemModifBAM());
+			jMenuModificaciones.add(getJMenuItemModifChip());
 		}
 		return jMenuModificaciones;
 	}
@@ -298,6 +309,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemImpresoras2 == null) {
 			jMenuItemImpresoras2 = new JMenuItem();
 			jMenuItemImpresoras2.setText("Impresoras");
+			jMenuItemImpresoras2.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					AltaImpresora imp=new AltaImpresora();
+					getJContentPane().removeAll();
+					getContentPane().add(imp);
+					jContentPane.updateUI(); //  // TODO Auto-generated Event stub actionPerformed()
+				}
+			});
 		}
 		return jMenuItemImpresoras2;
 	}
@@ -448,6 +467,80 @@ public class MenuPpal extends JFrame {
 			jMenuConsultas.setText("Consultas");
 		}
 		return jMenuConsultas;
+	}
+
+	/**
+	 * This method initializes jMenuItemBAM	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemBAM() {
+		if (jMenuItemBAM == null) {
+			jMenuItemBAM = new JMenuItem();
+			jMenuItemBAM.setText("Banda ancha movil");
+			jMenuItemBAM.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					AltaBam aBam=new AltaBam();
+					getJContentPane().removeAll();
+					getContentPane().add(aBam);
+					jContentPane.updateUI(); // 
+					
+				}
+			});
+		}
+		return jMenuItemBAM;
+	}
+
+	/**
+	 * This method initializes jMenuItemChip	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemChip() {
+		if (jMenuItemChip == null) {
+			jMenuItemChip = new JMenuItem();
+			jMenuItemChip.setText("Chip");
+		}
+		return jMenuItemChip;
+	}
+
+	/**
+	 * This method initializes jMenuItemModifBAM	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemModifBAM() {
+		if (jMenuItemModifBAM == null) {
+			jMenuItemModifBAM = new JMenuItem();
+			jMenuItemModifBAM.setText("Banda ancha movil");
+		}
+		return jMenuItemModifBAM;
+	}
+
+	/**
+	 * This method initializes jMenuItemModifChip	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemModifChip() {
+		if (jMenuItemModifChip == null) {
+			jMenuItemModifChip = new JMenuItem();
+			jMenuItemModifChip.setText("Chip");
+		}
+		return jMenuItemModifChip;
+	}
+
+	/**
+	 * This method initializes jMenuItemBam	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemBam() {
+		if (jMenuItemBam == null) {
+			jMenuItemBam = new JMenuItem();
+			jMenuItemBam.setText("Banda ancha movil");
+		}
+		return jMenuItemBam;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
