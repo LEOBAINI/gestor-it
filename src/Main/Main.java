@@ -47,7 +47,7 @@ public class Main {
 		menu.getContentPane().add(ini);
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		menu.setVisible(true);
-		
+		//pruebaSVN
 
 		
 		
