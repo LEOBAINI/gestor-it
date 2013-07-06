@@ -76,7 +76,7 @@ public class MenuPpal extends JFrame {
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
 		this.setTitle("Menú principal                                                                                                                                                                                                  por Leonardo Baini");
-		 
+		this.setLocationRelativeTo(null); 
 	}
 
 	/**
@@ -330,6 +330,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemHandHelds == null) {
 			jMenuItemHandHelds = new JMenuItem();
 			jMenuItemHandHelds.setText("HandHelds");
+			jMenuItemHandHelds.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					AltaHanHeld hand=new AltaHanHeld();
+					getJContentPane().removeAll();
+					getContentPane().add(hand);
+					jContentPane.updateUI(); // 
+				}
+			});
 		}
 		return jMenuItemHandHelds;
 	}
@@ -500,6 +508,15 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemChip == null) {
 			jMenuItemChip = new JMenuItem();
 			jMenuItemChip.setText("Chip");
+			jMenuItemChip.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					AltaChip chip=new AltaChip();
+					getContentPane().removeAll();
+					getContentPane().add(chip);
+					jContentPane.updateUI();
+					
+				}
+			});
 		}
 		return jMenuItemChip;
 	}
