@@ -15,6 +15,10 @@ import java.awt.Choice;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+import Abm.AdministradorABM;
+import Objetos.Impresora;
 
 @SuppressWarnings("unused")
 public class AltaImpresora extends JPanel {
@@ -30,7 +34,7 @@ public class AltaImpresora extends JPanel {
 	private JButton jButtonDarAlta = null;
 	private JLabel Impresora = null;
 	private JLabel jLabelImpresora = null;
-
+	private JButton jButtonLimpiar = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -80,6 +84,7 @@ public class AltaImpresora extends JPanel {
 		this.add(getJButtonDarAlta(), null);
 		this.add(jLabelImpresora, null);
 		//this.add(Impresora, null);
+		this.add(getJButtonLimpiar(), null);
 	}
 
 	/**
@@ -129,10 +134,51 @@ public class AltaImpresora extends JPanel {
 	private JButton getJButtonDarAlta() {
 		if (jButtonDarAlta == null) {
 			jButtonDarAlta = new JButton();
-			jButtonDarAlta.setBounds(new Rectangle(408, 270, 197, 23));
+			jButtonDarAlta.setBounds(new Rectangle(138, 266, 106, 26));
 			jButtonDarAlta.setText("Dar de alta");
+			jButtonDarAlta.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					
+					String nroSerie=jTextFieldNroSerie.getText();
+					String marca=jTextFieldMarca.getText();
+					String modelo=jTextFieldModelo.getText();
+					if(nroSerie.isEmpty() || marca.isEmpty() || modelo.isEmpty()){
+						JOptionPane.showMessageDialog(null, "Hay campos vacios, reintente");
+					}else{
+					AdministradorABM abm=new AdministradorABM();
+					Impresora imp=new Impresora(nroSerie,marca,modelo);
+					int status=	abm.darDeAlta(imp, "furlong", "impresora");
+					if(status==1){
+						JOptionPane.showMessageDialog(null, "Impresora agregada correctamente");
+					}else{
+						JOptionPane.showMessageDialog(null, "Hubo un problema, los datos no se cargaron reintente");
+					}
+					}
+				}
+			});
 		}
 		return jButtonDarAlta;
+	}
+
+	/**
+	 * This method initializes jButtonLimpiar	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButtonLimpiar() {
+		if (jButtonLimpiar == null) {
+			jButtonLimpiar = new JButton();
+			jButtonLimpiar.setBounds(new Rectangle(382, 266, 96, 26));
+			jButtonLimpiar.setText("Limpiar");
+			jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					jTextFieldNroSerie.setText("");
+					jTextFieldMarca.setText("");
+					jTextFieldModelo.setText("");
+				}
+			});
+		}
+		return jButtonLimpiar;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

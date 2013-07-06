@@ -8,9 +8,16 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import Base.metodosSql;
+
+import java.awt.Choice;
+import java.util.ArrayList;
+
+@SuppressWarnings("unused")
 public class AltaHanHeld extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +34,9 @@ public class AltaHanHeld extends JPanel {
 	private JTextField jTextFieldNroSerie = null;
 	private JTextField jTextFieldChapa = null;
 	private JButton jButtonDarAltaHheld = null;
+	private Choice choiceChip = null;
+	private JLabel jLabelChip = null;
+	private JButton jButtonAyuda = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -41,6 +51,9 @@ public class AltaHanHeld extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
+		jLabelChip = new JLabel();
+		jLabelChip.setBounds(new Rectangle(227, 87, 181, 23));
+		jLabelChip.setText("Chip nro");
 		jLabelEsDual = new JLabel();
 		jLabelEsDual.setBounds(new Rectangle(254, 63, 60, 17));
 		jLabelEsDual.setText("Es dual?");
@@ -79,6 +92,9 @@ public class AltaHanHeld extends JPanel {
 		this.add(getJTextFieldNroSerie(), null);
 		this.add(getJTextFieldChapa(), null);
 		this.add(getJButtonDarAltaHheld(), null);
+		this.add(getChoiceChip(), null);
+		this.add(jLabelChip, null);
+		this.add(getJButtonAyuda(), null);
 	}
 
 	/**
@@ -156,8 +172,84 @@ public class AltaHanHeld extends JPanel {
 			jButtonDarAltaHheld = new JButton();
 			jButtonDarAltaHheld.setBounds(new Rectangle(372, 226, 115, 38));
 			jButtonDarAltaHheld.setText("Dar alta");
+			jButtonDarAltaHheld.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int opcion=JOptionPane.showConfirmDialog(null, "Confirme", "Está seguro que desea dar el alta?", JOptionPane.YES_NO_OPTION);
+					if(opcion==0){//"SI"
+						
+					System.out.println("Eligió si!");	
+					}
+					else{//"NO"
+						
+						System.out.println("Eligió no!");
+					}
+				
+				}
+			});
 		}
 		return jButtonDarAltaHheld;
+	}
+
+	/**
+	 * This method initializes choiceChip	
+	 * 	
+	 * @return java.awt.Choice	
+	 */
+	private Choice getChoiceChip() {
+		if (choiceChip == null) {
+			choiceChip = new Choice();
+			choiceChip.setBounds(new Rectangle(226, 121, 183, 20));
+			choiceChip.add("Sin chip");
+			choiceChip.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mousePressed(java.awt.event.MouseEvent e) {
+					String chipsDisponibles="select serial from furlong.chip" +
+							" where estado = 'EN STOCK*'";
+					ArrayList<String>chips;
+					metodosSql metodos=new metodosSql();
+					chips=metodos.consultarUnaColumna(chipsDisponibles);
+					choiceChip.removeAll();
+					choiceChip.add("Sin chip");
+					for(int i=0;i<chips.size();i++)
+						choiceChip.add(chips.get(i));
+						jButtonAyuda.setVisible(true);
+				}
+				
+			});
+		}
+		return choiceChip;
+	}
+
+	/**
+	 * This method initializes jButtonAyuda	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButtonAyuda() {
+		if (jButtonAyuda == null) {
+			jButtonAyuda = new JButton();
+			jButtonAyuda.setBounds(new Rectangle(416, 120, 80, 21));
+			jButtonAyuda.setText("Ayuda");
+			jButtonAyuda.setVisible(false);
+			jButtonAyuda.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					String numero=JOptionPane.showInputDialog(null, null, "Ingrese los 6 ultimos numeros",JOptionPane.INFORMATION_MESSAGE);
+					int encontrado=0;
+					if(numero!=null){
+					for(int i=0;i<choiceChip.getItemCount();i++){
+						if(choiceChip.getItem(i).contains(numero)){
+							choiceChip.select(i);
+							encontrado=1;
+						}
+					}if(encontrado==0){
+						
+							JOptionPane.showMessageDialog(null, "No existe el elemento buscado","Reintente por favor" , JOptionPane.WARNING_MESSAGE);
+						
+					}
+					}
+				}
+			});
+		}
+		return jButtonAyuda;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

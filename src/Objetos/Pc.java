@@ -12,6 +12,7 @@ public class Pc extends Persistente {
 	String usuarioAsignado;
 	String usuarioLogin;
 	String office;
+	
 	public String getOffice() {
 		return office;
 	}
