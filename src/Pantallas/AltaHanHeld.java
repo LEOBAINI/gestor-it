@@ -13,9 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import Base.metodosSql;
+import Objetos.HandHeld;
 
 import java.awt.Choice;
 import java.util.ArrayList;
+import javax.swing.JTextPane;
 
 @SuppressWarnings("unused")
 public class AltaHanHeld extends JPanel {
@@ -37,6 +39,13 @@ public class AltaHanHeld extends JPanel {
 	private Choice choiceChip = null;
 	private JLabel jLabelChip = null;
 	private JButton jButtonAyuda = null;
+	private JTextPane jTextPaneComentario = null;
+	private JLabel jLabelComentario = null;
+	private JLabel jLabelGarantiaHasta = null;
+	private JTextField jTextFieldGarantiaHasta = null;
+	private JLabel jLabelFormatoFecha = null;
+	private JLabel jLabelMarcaChip = null;
+	private String numeroChip="Sin chip";
 	/**
 	 * This is the default constructor
 	 */
@@ -51,6 +60,18 @@ public class AltaHanHeld extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
+		jLabelMarcaChip = new JLabel();
+		jLabelMarcaChip.setBounds(new Rectangle(416, 86, 83, 22));
+		jLabelMarcaChip.setText("");
+		jLabelFormatoFecha = new JLabel();
+		jLabelFormatoFecha.setBounds(new Rectangle(416, 224, 82, 18));
+		jLabelFormatoFecha.setText("AAAA-MM-DD");
+		jLabelGarantiaHasta = new JLabel();
+		jLabelGarantiaHasta.setBounds(new Rectangle(226, 207, 271, 16));
+		jLabelGarantiaHasta.setText("Garantía hasta (Si no tiene DEJAR EN BLANCO)");
+		jLabelComentario = new JLabel();
+		jLabelComentario.setBounds(new Rectangle(226, 143, 182, 14));
+		jLabelComentario.setText("Comentario");
 		jLabelChip = new JLabel();
 		jLabelChip.setBounds(new Rectangle(227, 87, 181, 23));
 		jLabelChip.setText("Chip nro");
@@ -95,6 +116,12 @@ public class AltaHanHeld extends JPanel {
 		this.add(getChoiceChip(), null);
 		this.add(jLabelChip, null);
 		this.add(getJButtonAyuda(), null);
+		this.add(getJTextPaneComentario(), null);
+		this.add(jLabelComentario, null);
+		this.add(jLabelGarantiaHasta, null);
+		this.add(getJTextFieldGarantiaHasta(), null);
+		this.add(jLabelFormatoFecha, null);
+		this.add(jLabelMarcaChip, null);
 	}
 
 	/**
@@ -170,12 +197,33 @@ public class AltaHanHeld extends JPanel {
 	private JButton getJButtonDarAltaHheld() {
 		if (jButtonDarAltaHheld == null) {
 			jButtonDarAltaHheld = new JButton();
-			jButtonDarAltaHheld.setBounds(new Rectangle(372, 226, 115, 38));
+			jButtonDarAltaHheld.setBounds(new Rectangle(383, 265, 115, 38));
 			jButtonDarAltaHheld.setText("Dar alta");
 			jButtonDarAltaHheld.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					int opcion=JOptionPane.showConfirmDialog(null, "Confirme", "Está seguro que desea dar el alta?", JOptionPane.YES_NO_OPTION);
 					if(opcion==0){//"SI"
+						String marca=getJTextFieldMarca().getText();
+						String modelo=getJTextFieldModelo().getText();
+						String nroSerie=getJTextFieldNroSerie().getText();
+						int chapaNro=Integer.parseInt(getJTextFieldChapa().getText());
+						String esDual="NO";
+						if(getJCheckBoxDual().isEnabled())
+							esDual="SI";
+						String comentario=getJTextPaneComentario().getText();
+						String garantia="NO";
+						if(getJTextFieldGarantiaHasta().getText().length()>9)
+							garantia=getJTextFieldGarantiaHasta().getText();
+						String chipMarca=jLabelMarca.getText();
+						String chipNro=numeroChip;
+						
+						
+						
+						
+						HandHeld hand=new HandHeld(chapaNro, nroSerie,chipMarca ,modelo, comentario, esDual, garantia);
+						if(!chipNro.equals("Sin chip")){
+							hand.setChip(chipNro);
+						}
 						
 					System.out.println("Eligió si!");	
 					}
@@ -198,8 +246,23 @@ public class AltaHanHeld extends JPanel {
 	private Choice getChoiceChip() {
 		if (choiceChip == null) {
 			choiceChip = new Choice();
-			choiceChip.setBounds(new Rectangle(226, 121, 183, 20));
+			choiceChip.setBounds(new Rectangle(225, 115, 183, 20));
 			choiceChip.add("Sin chip");
+			choiceChip.addItemListener(new java.awt.event.ItemListener() {
+				public void itemStateChanged(java.awt.event.ItemEvent e) {
+					metodosSql metodos=new metodosSql();
+					
+					String marcaChip=getChoiceChip().getSelectedItem();
+					numeroChip=marcaChip;
+					String consulta="SELECT MARCA FROM furlong.chip WHERE SERIAL='"+marcaChip+"';";
+					try{
+						marcaChip=metodos.consultarUnaColumna(consulta).get(0);
+						jLabelMarcaChip.setText(marcaChip);
+					}catch(Exception e1){
+						
+					}
+				}
+			});
 			choiceChip.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mousePressed(java.awt.event.MouseEvent e) {
 					String chipsDisponibles="select serial from furlong.chip" +
@@ -215,6 +278,10 @@ public class AltaHanHeld extends JPanel {
 				}
 				
 			});
+			
+			
+			
+			
 		}
 		return choiceChip;
 	}
@@ -238,6 +305,22 @@ public class AltaHanHeld extends JPanel {
 					for(int i=0;i<choiceChip.getItemCount();i++){
 						if(choiceChip.getItem(i).contains(numero)){
 							choiceChip.select(i);
+							
+							numeroChip=choiceChip.getItem(i);
+									metodosSql metodos=new metodosSql();
+									
+									String marcaChip=null;
+									String consulta="SELECT MARCA FROM furlong.chip WHERE SERIAL='"+choiceChip.getItem(i)+"';";
+									try{
+										marcaChip=metodos.consultarUnaColumna(consulta).get(0);
+										jLabelMarcaChip.setText(marcaChip);
+									}catch(Exception e1){
+										
+									}
+								}
+							
+							
+							
 							encontrado=1;
 						}
 					}if(encontrado==0){
@@ -245,11 +328,38 @@ public class AltaHanHeld extends JPanel {
 							JOptionPane.showMessageDialog(null, "No existe el elemento buscado","Reintente por favor" , JOptionPane.WARNING_MESSAGE);
 						
 					}
-					}
 				}
-			});
-		}
+				});//fin action listener
+			
+		}//fin if ppal
 		return jButtonAyuda;
+	}
+
+	/**
+	 * This method initializes jTextPaneComentario	
+	 * 	
+	 * @return javax.swing.JTextPane	
+	 */
+	private JTextPane getJTextPaneComentario() {
+		if (jTextPaneComentario == null) {
+			jTextPaneComentario = new JTextPane();
+			jTextPaneComentario.setBounds(new Rectangle(226, 159, 184, 42));
+		}
+		return jTextPaneComentario;
+	}
+
+	/**
+	 * This method initializes jTextFieldGarantiaHasta	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldGarantiaHasta() {
+		if (jTextFieldGarantiaHasta == null) {
+			jTextFieldGarantiaHasta = new JTextField();
+			jTextFieldGarantiaHasta.setBounds(new Rectangle(227, 225, 184, 18));
+			jTextFieldGarantiaHasta.setText("");
+		}
+		return jTextFieldGarantiaHasta;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
