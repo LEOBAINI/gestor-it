@@ -40,9 +40,9 @@ public class Main {
 		// TODO Auto-generated method stub
 		MenuPpal menu=new MenuPpal();
 		
-		Inicio ini=new Inicio();
+		/*Inicio ini=new Inicio();
 		menu.getJContentPane().removeAll();
-		menu.getContentPane().add(ini);
+		menu.getContentPane().add(ini);*/
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		menu.setVisible(true);
 		//pruebaSVN

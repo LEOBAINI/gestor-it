@@ -77,6 +77,11 @@ public class MenuPpal extends JFrame {
 		this.setContentPane(getJContentPane());
 		this.setTitle("Menú principal                                                                                                                                                                                                  por Leonardo Baini");
 		this.setLocationRelativeTo(null); 
+		Inicio ini=new Inicio();
+		this.getJContentPane().removeAll();
+		this.getContentPane().add(ini);
+		jContentPane.updateUI();
+		
 	}
 
 	/**
