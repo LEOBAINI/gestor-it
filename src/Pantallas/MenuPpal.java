@@ -57,6 +57,7 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemModifBAM = null;
 	private JMenuItem jMenuItemModifChip = null;
 	private JMenuItem jMenuItemBam = null;
+	private JMenuItem jMenuItemConsultaGral = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -478,6 +479,7 @@ public class MenuPpal extends JFrame {
 		if (jMenuConsultas == null) {
 			jMenuConsultas = new JMenu();
 			jMenuConsultas.setText("Consultas");
+			jMenuConsultas.add(getJMenuItemConsultaGral());
 		}
 		return jMenuConsultas;
 	}
@@ -563,6 +565,28 @@ public class MenuPpal extends JFrame {
 			jMenuItemBam.setText("Banda ancha movil");
 		}
 		return jMenuItemBam;
+	}
+
+	/**
+	 * This method initializes jMenuItemConsultaGral	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemConsultaGral() {
+		if (jMenuItemConsultaGral == null) {
+			jMenuItemConsultaGral = new JMenuItem();
+			jMenuItemConsultaGral.setText("Consulta SQL");
+			jMenuItemConsultaGral.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					
+					ConsultaSQL cons=new ConsultaSQL();
+					getJContentPane().removeAll();
+					getContentPane().add(cons);
+					jContentPane.updateUI(); 
+				}
+			});
+		}
+		return jMenuItemConsultaGral;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
