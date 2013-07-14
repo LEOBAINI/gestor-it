@@ -12,10 +12,14 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import Abm.Persistente;
+import Objetos.MiModelo;
 
 public class metodosSql extends ConexionMySql {
+	
+	
 	
 	public metodosSql() {
 	}
@@ -194,6 +198,7 @@ public class metodosSql extends ConexionMySql {
 			
 
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Error en metodosSql.consultar"+e.getMessage());
 			System.out.println("Error en metodosSql.consultar"+e.getMessage());
 			System.out.println(e.getLocalizedMessage());
 			
@@ -204,7 +209,43 @@ public class metodosSql extends ConexionMySql {
 
 	}
 	
+	
+	
+	
+	public Object[] consultarNombresColumnas(String SentenciaSql) {
+		ResultSet res =null;
+		Object []nombreColumnas=null;
 		
+		
+		ConexionMySql con = new ConexionMySql();
+		
+		
+		try {
+			con.conectar();
+			con.resulsete=con.statemente.executeQuery(SentenciaSql);
+			res = con.resulsete;
+			ResultSetMetaData rmd = res.getMetaData(); //guardo los datos referentes al resultset
+			nombreColumnas= new Object[rmd.getColumnCount()];
+	            
+	           for(int i=0;i<nombreColumnas.length;i++){
+	        	   nombreColumnas[i]=rmd.getColumnName(i+1).toUpperCase();
+	           }
+	        con.desconectar();
+		
+
+			
+
+		} catch (Exception e) {
+			System.out.println("Error en metodosSql.consultar"+e.getMessage());
+			System.out.println(e.getLocalizedMessage());
+			
+		}
+
+		return nombreColumnas;
+		
+
+	}
+	
 		
 	
 	public ArrayList<String>consultarUnaColumna(String SentenciaSql) {
@@ -219,6 +260,7 @@ public class metodosSql extends ConexionMySql {
 			con.conectar();
 			con.resulsete=con.statemente.executeQuery(SentenciaSql);
 			res = con.resulsete;
+			
 			
 			
 			 
@@ -239,6 +281,7 @@ public class metodosSql extends ConexionMySql {
 		
 
 	}
+	
 	public String dameNroTeDoyMes(int numeroDeMes){
 		String mes="NO EXISTE ESE MES";
 		if(numeroDeMes >=1 && numeroDeMes <=12){
@@ -350,6 +393,7 @@ public class metodosSql extends ConexionMySql {
 		return status;
 
 	}
+	
 	
 
 }
