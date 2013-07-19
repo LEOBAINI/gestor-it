@@ -146,7 +146,7 @@ public class AltaImpresora extends JPanel {
 						JOptionPane.showMessageDialog(null, "Hay campos vacios, reintente");
 					}else{
 					AdministradorABM abm=new AdministradorABM();
-					Impresora imp=new Impresora(nroSerie,marca,modelo);
+					Impresora imp=new Impresora(nroSerie.toUpperCase(),marca.toUpperCase(),modelo.toUpperCase());
 					int status=	abm.darDeAlta(imp, "furlong", "impresora");
 					if(status==1){
 						JOptionPane.showMessageDialog(null, "Impresora agregada correctamente");

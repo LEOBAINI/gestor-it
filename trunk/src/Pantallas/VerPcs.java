@@ -11,6 +11,7 @@ import javax.swing.JButton;
 
 import Base.metodosSql;
 
+@SuppressWarnings("unused")
 public class VerPcs extends JPanel {
 
 	private static final long serialVersionUID = 1L;

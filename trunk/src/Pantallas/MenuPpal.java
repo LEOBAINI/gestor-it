@@ -415,6 +415,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemImpresorasModif == null) {
 			jMenuItemImpresorasModif = new JMenuItem();
 			jMenuItemImpresorasModif.setText("Impresoras");
+			jMenuItemImpresorasModif.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					ModifImpresoras impresora=new ModifImpresoras();
+					getJContentPane().removeAll();
+					getContentPane().add(impresora);
+					jContentPane.updateUI(); // 
+				}
+			});
 		}
 		return jMenuItemImpresorasModif;
 	}
