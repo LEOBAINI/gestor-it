@@ -18,14 +18,14 @@ import javax.swing.JTextArea;
 
 import Abm.AdministradorABM;
 import Objetos.Notebook;
+import Objetos.Pc;
+import java.awt.ScrollPane;
 
 @SuppressWarnings("unused")
 public class AltaPcNtb extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel jLabelAltaPCNTB = null;
-	private JTextField jTextFieldID = null;
-	private JLabel jLabelID = null;
 	private JLabel jLabelSO = null;
 	private JTextField jTextFieldUsuario = null;
 	private JLabel jLabelUsuarioAsignado = null;
@@ -37,7 +37,6 @@ public class AltaPcNtb extends JPanel {
 	private JLabel jLabelEsVisible = null;
 	private Choice choiceSistemaOperativo = null;
 	private JButton jButtonDarAlta = null;
-	private JButton jButtonAutoCompletar = null;
 	private JLabel jLabelImagen = null;
 	private JTextArea jTextAreaComentario = null;
 	private JLabel jLabelComentario = null;
@@ -60,10 +59,10 @@ public class AltaPcNtb extends JPanel {
 	 */
 	private void initialize() {
 		jLabelOffice = new JLabel();
-		jLabelOffice.setBounds(new Rectangle(25, 232, 109, 17));
+		jLabelOffice.setBounds(new Rectangle(24, 239, 114, 17));
 		jLabelOffice.setText("Paquete Office");
 		jLabelNombre = new JLabel();
-		jLabelNombre.setBounds(new Rectangle(24, 199, 112, 12));
+		jLabelNombre.setBounds(new Rectangle(24, 183, 114, 17));
 		jLabelNombre.setText("Nombre del equipo");
 		jLabelComentario = new JLabel();
 		jLabelComentario.setBounds(new Rectangle(210, 107, 141, 19));
@@ -79,26 +78,21 @@ public class AltaPcNtb extends JPanel {
 		jLabelEsNotebook.setBounds(new Rectangle(209, 42, 117, 21));
 		jLabelEsNotebook.setText("Es una notebook?");
 		jLabelUserLogin = new JLabel();
-		jLabelUserLogin.setBounds(new Rectangle(24, 156, 114, 20));
+		jLabelUserLogin.setBounds(new Rectangle(24, 127, 114, 17));
 		jLabelUserLogin.setText("Usuario logueado");
 		jLabelUsuarioAsignado = new JLabel();
-		jLabelUsuarioAsignado.setBounds(new Rectangle(24, 109, 114, 13));
+		jLabelUsuarioAsignado.setBounds(new Rectangle(24, 71, 114, 17));
 		jLabelUsuarioAsignado.setText("Usuario asignado");
 		jLabelSO = new JLabel();
-		jLabelSO.setBounds(new Rectangle(24, 67, 114, 17));
+		jLabelSO.setBounds(new Rectangle(24, 11, 114, 17));
 		jLabelSO.setText("Sist. operativo");
-		jLabelID = new JLabel();
-		jLabelID.setBounds(new Rectangle(24, 22, 114, 18));
-		jLabelID.setText("Identificador único");
 		jLabelAltaPCNTB = new JLabel();
-		jLabelAltaPCNTB.setBounds(new Rectangle(143, 7, 226, 16));
+		jLabelAltaPCNTB.setBounds(new Rectangle(179, 4, 226, 16));
 		jLabelAltaPCNTB.setFont(new Font("Borg9", Font.ITALIC, 12));
 		jLabelAltaPCNTB.setText("Alta de Pc y Notebook");
 		this.setSize(609, 306);
 		this.setLayout(null);
 		this.add(jLabelAltaPCNTB, null);
-		this.add(getJTextFieldID(), null);
-		this.add(jLabelID, null);
 		this.add(jLabelSO, null);
 		this.add(getJTextFieldUsuario(), null);
 		this.add(jLabelUsuarioAsignado, null);
@@ -110,7 +104,6 @@ public class AltaPcNtb extends JPanel {
 		this.add(jLabelEsVisible, null);
 		this.add(getChoiceSistemaOperativo(), null);
 		this.add(getJButtonDarAlta(), null);
-		this.add(getJButtonAutoCompletar(), null);
 		this.add(jLabelImagen, null);
 		this.add(getJTextAreaComentario(), null);
 		this.add(jLabelComentario, null);
@@ -121,19 +114,6 @@ public class AltaPcNtb extends JPanel {
 	}
 
 	/**
-	 * This method initializes jTextFieldID	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getJTextFieldID() {
-		if (jTextFieldID == null) {
-			jTextFieldID = new JTextField();
-			jTextFieldID.setBounds(new Rectangle(24, 43, 109, 20));
-		}
-		return jTextFieldID;
-	}
-
-	/**
 	 * This method initializes jTextFieldUsuario	
 	 * 	
 	 * @return javax.swing.JTextField	
@@ -141,7 +121,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getJTextFieldUsuario() {
 		if (jTextFieldUsuario == null) {
 			jTextFieldUsuario = new JTextField();
-			jTextFieldUsuario.setBounds(new Rectangle(24, 127, 109, 21));
+			jTextFieldUsuario.setBounds(new Rectangle(24, 99, 114, 17));
 		}
 		return jTextFieldUsuario;
 	}
@@ -154,7 +134,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getUserLogin() {
 		if (UserLogin == null) {
 			UserLogin = new JTextField();
-			UserLogin.setBounds(new Rectangle(24, 181, 109, 19));
+			UserLogin.setBounds(new Rectangle(24, 155, 114, 17));
 		}
 		return UserLogin;
 	}
@@ -203,7 +183,7 @@ public class AltaPcNtb extends JPanel {
 			choiceSistemaOperativo.add("Windows 8");
 			choiceSistemaOperativo.add("Otro");
 			
-			choiceSistemaOperativo.setBounds(new Rectangle(23, 85, 152, 21));
+			choiceSistemaOperativo.setBounds(new Rectangle(24, 39, 158, 21));
 		}
 		return choiceSistemaOperativo;
 	}
@@ -221,15 +201,18 @@ public class AltaPcNtb extends JPanel {
 			jButtonDarAlta.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 				if(getJCheckBoxEsNotebook().isSelected()){	
-				Notebook ntb=new Notebook(jTextFieldNombre.getText(),jTextFieldID.getText());
+				Notebook ntb=new Notebook(jTextFieldNombre.getText().toUpperCase());
 				ntb.setSistemaOperativo(getChoiceSistemaOperativo().getSelectedItem());
-				ntb.setUsuarioAsignado(getJTextFieldUsuario().getText());
-				ntb.setUsuarioLogin(getUserLogin().getText());
-				ntb.setNombre(getJTextFieldNombre().getText());
+				ntb.setUsuarioAsignado(getJTextFieldUsuario().getText().toUpperCase());
+				ntb.setUsuarioLogin(getUserLogin().getText().toUpperCase());
+				ntb.setNombre(getJTextFieldNombre().getText().toUpperCase());
 				ntb.setOffice(getChoiceOffice().getSelectedItem());
 				ntb.setEsVisible(getJCheckBoxEsVisible().isSelected());
+				ntb.setEsNotebook("SI");
+				if(jTextAreaComentario.getText().length()>0)
+				ntb.setComentario(jTextAreaComentario.getText().toUpperCase());
 				AdministradorABM abm=new AdministradorABM();
-				int stat=abm.darDeAlta(ntb, "furlong", "notebook");
+				int stat=abm.darDeAlta(ntb, "furlong", "PC");
 				if(stat==1){
 					JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
 				}else{
@@ -238,6 +221,24 @@ public class AltaPcNtb extends JPanel {
 				}
 				}
 				else{
+					Pc pc=new Pc(jTextFieldNombre.getText().toUpperCase());
+					pc.setSistemaOperativo(getChoiceSistemaOperativo().getSelectedItem());
+					pc.setUsuarioAsignado(getJTextFieldUsuario().getText().toUpperCase());
+					pc.setUsuarioLogin(getUserLogin().getText().toUpperCase());
+					pc.setNombre(getJTextFieldNombre().getText().toUpperCase());
+					pc.setOffice(getChoiceOffice().getSelectedItem());
+					pc.setEsVisible(getJCheckBoxEsVisible().isSelected());
+					if(jTextAreaComentario.getText().length()>0)
+						pc.setComentario(jTextAreaComentario.getText().toUpperCase());
+					pc.setEsNotebook("NO");
+					AdministradorABM abm=new AdministradorABM();
+					int stat=abm.darDeAlta(pc, "furlong", "PC");
+					if(stat==1){
+						JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
+					}else{
+						JOptionPane.showMessageDialog(null,"Hubo un problema, los datos no se cargaron");
+						
+					}
 					
 				}
 				
@@ -253,20 +254,6 @@ public class AltaPcNtb extends JPanel {
 	}
 
 	/**
-	 * This method initializes jButtonAutoCompletar	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getJButtonAutoCompletar() {
-		if (jButtonAutoCompletar == null) {
-			jButtonAutoCompletar = new JButton();
-			jButtonAutoCompletar.setBounds(new Rectangle(293, 211, 144, 17));
-			jButtonAutoCompletar.setText("Autocompletar");
-		}
-		return jButtonAutoCompletar;
-	}
-
-	/**
 	 * This method initializes jTextAreaComentario	
 	 * 	
 	 * @return javax.swing.JTextArea	
@@ -274,7 +261,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextArea getJTextAreaComentario() {
 		if (jTextAreaComentario == null) {
 			jTextAreaComentario = new JTextArea();
-			jTextAreaComentario.setBounds(new Rectangle(209, 127, 144, 71));
+			jTextAreaComentario.setBounds(new Rectangle(211, 172, 144, 71));
 		}
 		return jTextAreaComentario;
 	}
@@ -287,7 +274,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getJTextFieldNombre() {
 		if (jTextFieldNombre == null) {
 			jTextFieldNombre = new JTextField();
-			jTextFieldNombre.setBounds(new Rectangle(25, 213, 109, 18));
+			jTextFieldNombre.setBounds(new Rectangle(24, 211, 114, 17));
 		}
 		return jTextFieldNombre;
 	}
@@ -300,7 +287,7 @@ public class AltaPcNtb extends JPanel {
 	private Choice getChoiceOffice() {
 		if (choiceOffice == null) {
 			choiceOffice = new Choice();
-			choiceOffice.setBounds(new Rectangle(26, 250, 106, 20));
+			choiceOffice.setBounds(new Rectangle(24, 267, 114, 21));
 			choiceOffice.add("OF 2000 ");
 			choiceOffice.add("OF 2003 ");
 			choiceOffice.add("OF 2007 ");
@@ -310,4 +297,4 @@ public class AltaPcNtb extends JPanel {
 		return choiceOffice;
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="9,7"
+}  //  @jve:decl-index=0:visual-constraint="7,6"

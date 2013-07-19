@@ -6,12 +6,14 @@ import Abm.Persistente;
 
 public class Pc extends Persistente {
 	
-	String id;
+	
 	String nombre;
 	String sistemaOperativo;
 	String usuarioAsignado;
 	String usuarioLogin;
 	String office;
+	String esNotebook="NO";
+	String comentario="SIN COMENTARIO";
 	
 	public String getOffice() {
 		return office;
@@ -31,36 +33,44 @@ public class Pc extends Persistente {
 	private HashMap<Object, Object> todosLosAtributos;
 	
 	
-	public Pc(String nombre,String id){
+	public Pc(String nombre){
 		
 		super();
-		this.id = id;
+		
 		this.nombre = nombre;
 		
 		HashMap<Object, Object> atributos=new HashMap<Object,Object>();
 		
-		atributos.put("id", getId());
+		
 		atributos.put("nombre",getNombre());
 		
 		
 		this.todosLosAtributos=atributos;
 		
 	}
+	public String getComentario(){
+		return comentario;
+	}
 	
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+		this.todosLosAtributos.remove("comentario");
+		this.todosLosAtributos.put("comentario", comentario);
+		this.comentario = comentario;
+	}
 	
-
-	public String getId() {
-		return id;
+	public String getEsNotebook(){
+		return esNotebook;
+	}
+	
+	public void setEsNotebook(String es) {
+		this.esNotebook = es;
+		this.todosLosAtributos.remove("esNotebook");
+		this.todosLosAtributos.put("esNotebook", es);
+		this.esNotebook = es;
 	}
 
-
-
-	public void setId(String id) {
-		this.id = id;
-		this.todosLosAtributos.remove("id");
-		this.todosLosAtributos.put("id", id);
-		this.id = id;
-	}
+	
 
 
 
@@ -142,7 +152,7 @@ public class Pc extends Persistente {
 	@Override
 	public String identificadorUnico() {
 		
-		return "id";
+		return "nombre";
 	}
 
 	@Override

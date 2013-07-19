@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
@@ -13,15 +15,20 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
+
+import Abm.AdministradorABM;
+import Base.metodosSql;
+import Objetos.Notebook;
+import Objetos.Pc;
+
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class ModifPcNtb extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel jLabelAltaPCNTB = null;
-	private JTextField jTextFieldID = null;
-	private JLabel jLabelID = null;
 	private JLabel jLabelSO = null;
 	private JTextField jTextFieldUsuario = null;
 	private JLabel jLabelUsuarioAsignado = null;
@@ -41,6 +48,7 @@ public class ModifPcNtb extends JPanel {
 	private JLabel jLabelOffice = null;
 	private JLabel jLabelSeleccionarEquipo = null;
 	private Choice choiceEquiposAModif = null;
+	private int seleccionLleno=0;
 	/**
 	 * This is the default constructor
 	 */
@@ -82,9 +90,6 @@ public class ModifPcNtb extends JPanel {
 		jLabelSO = new JLabel();
 		jLabelSO.setBounds(new Rectangle(24, 67, 114, 17));
 		jLabelSO.setText("Sist. operativo");
-		jLabelID = new JLabel();
-		jLabelID.setBounds(new Rectangle(24, 22, 114, 18));
-		jLabelID.setText("Identificador único");
 		jLabelAltaPCNTB = new JLabel();
 		jLabelAltaPCNTB.setBounds(new Rectangle(143, 7, 292, 16));
 		jLabelAltaPCNTB.setFont(new Font("Borg9", Font.ITALIC, 12));
@@ -93,8 +98,6 @@ public class ModifPcNtb extends JPanel {
 		this.setSize(609, 306);
 		this.setLayout(null);
 		this.add(jLabelAltaPCNTB, null);
-		this.add(getJTextFieldID(), null);
-		this.add(jLabelID, null);
 		this.add(jLabelSO, null);
 		this.add(getJTextFieldUsuario(), null);
 		this.add(jLabelUsuarioAsignado, null);
@@ -114,19 +117,6 @@ public class ModifPcNtb extends JPanel {
 		this.add(jLabelOffice, null);
 		this.add(jLabelSeleccionarEquipo, null);
 		this.add(getChoiceEquiposAModif(), null);
-	}
-
-	/**
-	 * This method initializes jTextFieldID	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getJTextFieldID() {
-		if (jTextFieldID == null) {
-			jTextFieldID = new JTextField();
-			jTextFieldID.setBounds(new Rectangle(24, 43, 109, 20));
-		}
-		return jTextFieldID;
 	}
 
 	/**
@@ -214,6 +204,61 @@ public class ModifPcNtb extends JPanel {
 			jButtonModificar = new JButton();
 			jButtonModificar.setBounds(new Rectangle(375, 205, 232, 48));
 			jButtonModificar.setText("Modificar");
+			jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					
+					
+					//*****************alta***************************
+					if(getJCheckBoxEsNotebook().isSelected()){	
+						Notebook ntb=new Notebook(jTextFieldNombre.getText().toUpperCase());
+						ntb.setSistemaOperativo(getChoiceSistemaOperativo().getSelectedItem());
+						ntb.setUsuarioAsignado(getJTextFieldUsuario().getText().toUpperCase());
+						ntb.setUsuarioLogin(getUserLogin().getText().toUpperCase());
+						ntb.setNombre(getJTextFieldNombre().getText().toUpperCase());
+						ntb.setOffice(getChoiceOffice().getSelectedItem());
+						ntb.setEsVisible(getJCheckBoxEsVisible().isSelected());
+						ntb.setEsNotebook("SI");
+						if(jTextAreaComentario.getText().length()>0)
+						ntb.setComentario(jTextAreaComentario.getText().toUpperCase());
+						AdministradorABM abm=new AdministradorABM();
+						
+						int stat=abm.modificar(ntb, "furlong", "PC");
+						if(stat==1){
+							JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
+						}else{
+							JOptionPane.showMessageDialog(null,"Hubo un problema, los datos no se cargaron");
+							
+						}
+						}
+						else{
+							Pc pc=new Pc(jTextFieldNombre.getText().toUpperCase());
+							pc.setSistemaOperativo(getChoiceSistemaOperativo().getSelectedItem());
+							pc.setUsuarioAsignado(getJTextFieldUsuario().getText().toUpperCase());
+							pc.setUsuarioLogin(getUserLogin().getText().toUpperCase());
+							pc.setNombre(getJTextFieldNombre().getText().toUpperCase());
+							pc.setOffice(getChoiceOffice().getSelectedItem());
+							pc.setEsVisible(getJCheckBoxEsVisible().isSelected());
+							if(jTextAreaComentario.getText().length()>0)
+								pc.setComentario(jTextAreaComentario.getText().toUpperCase());
+							pc.setEsNotebook("NO");
+							AdministradorABM abm=new AdministradorABM();
+							int stat=abm.modificar(pc, "furlong", "PC");
+							if(stat==1){
+								JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
+							}else{
+								JOptionPane.showMessageDialog(null,"Hubo un problema, los datos no se cargaron");
+								
+							}
+						}
+					
+					
+					
+					
+					
+					//*********************************************
+					
+				}
+			});
 		}
 		return jButtonModificar;
 	}
@@ -267,10 +312,64 @@ public class ModifPcNtb extends JPanel {
 	 * 	
 	 * @return java.awt.Choice	
 	 */
+	
 	private Choice getChoiceEquiposAModif() {
 		if (choiceEquiposAModif == null) {
 			choiceEquiposAModif = new Choice();
 			choiceEquiposAModif.setBounds(new Rectangle(410, 65, 181, 22));
+			choiceEquiposAModif.addMouseListener(new java.awt.event.MouseAdapter() {   
+				public void mouseEntered(java.awt.event.MouseEvent e) { 
+					if(seleccionLleno==0){
+					choiceEquiposAModif.removeAll();
+					ArrayList<String>nombres;
+					metodosSql metodos=new metodosSql();
+					nombres=metodos.consultarUnaColumna("select nombre from furlong.pc");
+					for(int i=0;i<nombres.size();i++)
+						choiceEquiposAModif.add(nombres.get(i));
+				}   
+					seleccionLleno=1;
+				}
+				
+
+
+				
+			});
+			choiceEquiposAModif.addItemListener(new java.awt.event.ItemListener() {
+				public void itemStateChanged(java.awt.event.ItemEvent e) {
+					String nombre=null;
+					ArrayList<String> fila;
+					nombre=getChoiceEquiposAModif().getSelectedItem();
+					//System.out.println(nombre);
+					metodosSql metodos=new metodosSql();
+					fila=metodos.consultar("select * from furlong.pc where nombre = "+"'"+nombre+"'").get(0);
+					String nombrePc=fila.get(0);
+					jTextFieldNombre.setText(nombrePc);
+					String so=fila.get(1);
+					choiceSistemaOperativo.select(so);
+					String usuario=fila.get(2);
+					jTextFieldUsuario.setText(usuario);
+					String usuarioLog=fila.get(3);
+					UserLogin.setText(usuarioLog);
+					String esVisible=fila.get(4);
+					System.out.println("Es visible= "+esVisible);
+					if(esVisible.equals("1")){
+						jCheckBoxEsVisible.setSelected(true);
+					}else{
+						jCheckBoxEsVisible.setSelected(false);
+					}
+					String office=fila.get(5);
+					choiceOffice.select(office);
+					String comentario=fila.get(6);
+					jTextAreaComentario.setText(comentario);
+					String esNotebook=fila.get(7);
+					
+					if(esNotebook.equals("SI")){
+					jCheckBoxEsNotebook.setSelected(true);
+					}else{
+						jCheckBoxEsNotebook.setSelected(false);
+					}
+				}
+			});
 		}
 		return choiceEquiposAModif;
 	}

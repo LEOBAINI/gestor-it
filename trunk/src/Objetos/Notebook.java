@@ -2,8 +2,8 @@ package Objetos;
 
 public class Notebook extends Pc {
 
-	public Notebook(String nombre,String id) {
-		super(nombre, id);
+	public Notebook(String nombre) {
+		super(nombre);
 		// TODO Auto-generated constructor stub
 	}
 	

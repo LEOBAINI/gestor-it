@@ -23,6 +23,7 @@ import com.sun.xml.internal.ws.api.addressing.WSEndpointReference.Metadata;
 
 import Base.metodosSql;
 
+@SuppressWarnings("unused")
 public class ConsultaSQL extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -107,50 +108,14 @@ public class ConsultaSQL extends JPanel {
 			jButtonEjecutar.setText("Ejecutar consulta");
 			jButtonEjecutar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-				try{
-				jTableConsulta.removeAll();
-				ArrayList<ArrayList<String>> fullConsulta=new ArrayList<ArrayList<String>>();
-				metodosSql metodos=new metodosSql();
-					
-					
-				String consulta=jTextAreaConsulta.getText();
-				fullConsulta=metodos.consultar(consulta);
-				//ResultSet res=metodos.consultarResultSet(consulta);
-				
-				int columnas=fullConsulta.get(0).size();
-				int filas=fullConsulta.size();
-				DefaultTableModel modelo = new DefaultTableModel();
-				
-				modelo.setColumnCount(columnas);
-				modelo.setRowCount(filas);
-				
-				
-				
-				
-				for(int i=0;i<filas;i++){
-				
-				for(int j=0;j<columnas;j++){
-				
-				
-				
-				 modelo.setValueAt(fullConsulta.get(i).get(j), i, j);
+					metodosSql metodos=new metodosSql();
+					metodos.llenarJtable(jTableConsulta, jTextAreaConsulta.getText());
 				}
-				}
-				modelo.setColumnIdentifiers(metodos.consultarNombresColumnas(consulta));
-				
-				
-				
-				jTableConsulta.setModel(modelo);
-				}catch(Exception r){
-					
-				}
-				}
-				}
-									
-				
-			);
-		}
-		return jButtonEjecutar;
+			});
+			
+		   
+			}
+		 return jButtonEjecutar;
 	}
 
 	/**
