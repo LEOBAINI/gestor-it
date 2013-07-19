@@ -13,9 +13,9 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import Abm.Persistente;
-import Objetos.MiModelo;
 
 public class metodosSql extends ConexionMySql {
 	
@@ -393,6 +393,45 @@ public class metodosSql extends ConexionMySql {
 		return status;
 
 	}
+	
+	public void llenarJtable(JTable tabla,String consulta){
+		tabla.removeAll();
+		ArrayList<ArrayList<String>> fullConsulta=new ArrayList<ArrayList<String>>();
+		metodosSql metodos=new metodosSql();
+			
+			
+		
+		fullConsulta=metodos.consultar(consulta);
+		//ResultSet res=metodos.consultarResultSet(consulta);
+		if(fullConsulta.size()>0){
+		int columnas=fullConsulta.get(0).size();
+		int filas=fullConsulta.size();
+		DefaultTableModel modelo = new DefaultTableModel();
+		
+		modelo.setColumnCount(columnas);
+		modelo.setRowCount(filas);
+		
+		
+		
+		
+		for(int i=0;i<filas;i++){
+		
+		for(int j=0;j<columnas;j++){
+		
+		
+		
+		 modelo.setValueAt(fullConsulta.get(i).get(j), i, j);
+		}
+		}
+		modelo.setColumnIdentifiers(metodos.consultarNombresColumnas(consulta));
+		
+		
+		
+		tabla.setModel(modelo);
+		
+		}
+	}
+	
 	
 	
 

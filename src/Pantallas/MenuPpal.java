@@ -185,6 +185,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemPc == null) {
 			jMenuItemPc = new JMenuItem();
 			jMenuItemPc.setText("Ver Pcs");
+			jMenuItemPc.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					VerPcs pc=new VerPcs();
+					getJContentPane().removeAll();
+					getContentPane().add(pc);
+					jContentPane.updateUI(); // 
+				}
+			});
 		}
 		return jMenuItemPc;
 	}
