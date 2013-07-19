@@ -31,7 +31,7 @@ public class Impresora extends Persistente {
 
 	public String identificadorUnico() {
 		
-		return this.id;
+		return "id";
 	}
 
 
