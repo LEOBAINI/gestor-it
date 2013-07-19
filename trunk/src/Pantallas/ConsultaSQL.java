@@ -5,9 +5,11 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
@@ -17,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JTable.PrintMode;
 import javax.swing.table.DefaultTableModel;
 
 import com.sun.xml.internal.ws.api.addressing.WSEndpointReference.Metadata;
@@ -33,6 +36,7 @@ public class ConsultaSQL extends JPanel {
 	private JTable jTableConsulta = null;
 	private JButton jButtonEjecutar = null;
 	private JScrollPane jScrollPaneTabla = null;
+	private JButton jButtonImprimir = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -56,6 +60,7 @@ public class ConsultaSQL extends JPanel {
 		this.add(getJScrollPaneConsulta(), null);
 		this.add(getJButtonEjecutar(), null);
 		this.add(getJScrollPaneTabla(), null);
+		this.add(getJButtonImprimir(), null);
 	}
 
 	/**
@@ -130,6 +135,38 @@ public class ConsultaSQL extends JPanel {
 			jScrollPaneTabla.setViewportView(getJTableConsulta());
 		}
 		return jScrollPaneTabla;
+	}
+
+	/**
+	 * This method initializes jButtonImprimir	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButtonImprimir() {
+		if (jButtonImprimir == null) {
+			jButtonImprimir = new JButton();
+			jButtonImprimir.setText("IMPRIMIR");
+			jButtonImprimir.setBounds(new Rectangle(97, 7, 138, 22));
+			jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					metodosSql metodos=new metodosSql();
+					String titulo;
+					titulo=JOptionPane.showInputDialog("Ingrese título del informe");
+					if(titulo!=null){
+					MessageFormat headerFormat = new MessageFormat(titulo+"\n al "+metodos.dameFechaDeHoy()+" ,"+getJTableConsulta().getRowCount()+" filas.");
+		                     MessageFormat footerFormat = new MessageFormat("- Página {0} -");
+		                     try {
+								jTableConsulta.print(PrintMode.FIT_WIDTH, headerFormat, footerFormat);
+							} catch (PrinterException e1) {
+								// TODO Auto-generated catch block
+								JOptionPane.showMessageDialog(null, "Hubo un error intente de nuevo");
+								e1.printStackTrace();
+							}	
+				}
+			}
+			});
+		}
+		return jButtonImprimir;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

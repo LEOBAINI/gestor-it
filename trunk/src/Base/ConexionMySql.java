@@ -11,7 +11,7 @@ public class ConexionMySql {
         protected  Statement statemente;
         protected  ResultSet resulsete;
         private  String base="furlong";
-        private  String host="localhost";
+        public static  String host;//="localhost";
         private  String cadena="jdbc:mysql://"+host+"/"+base;
        // private static String cadena="jdbc:mysql://localhost/pruebas";
         private  String driver="com.mysql.jdbc.Driver";
@@ -35,6 +35,7 @@ public class ConexionMySql {
 
 
 
+		@SuppressWarnings("static-access")
 		public void setHost(String host) {
 			this.host = host;
 		}
@@ -47,22 +48,28 @@ public class ConexionMySql {
         
         
        
-        public void conectar(){
+        public int conectar(){
+        	int status=0;
             try{
             	
                 Class.forName(driver);
                 c=DriverManager.getConnection(cadena,"root","root");
                  statemente=c.createStatement();
                //  System.out.println("Conectado OK");
-                
+               status=1;
 
             }catch(ClassNotFoundException e1){
              System.out.println("Error en los drivers");
+             status=0;
+            
             }
             catch(SQLException e2){
                 System.out.println("Error en la conexion");
+                status=0;
+                
 
             }
+            return status;
 
     }
        
@@ -72,6 +79,7 @@ public class ConexionMySql {
 				try {
 					if (c != null){
 						c.close();
+						 
 						
 						
 						

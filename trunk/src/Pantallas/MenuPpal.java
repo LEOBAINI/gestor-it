@@ -23,7 +23,7 @@ public class MenuPpal extends JFrame {
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
-
+	public static String titulo="Software de Gestión construido por y para profesionales IT";
 	private JPanel jContentPane = null;
 	private JMenuBar jJMenuBar = null;
 	private JMenu jMenuArchivo = null;
@@ -35,7 +35,6 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemRetirar = null;
 	private JMenu jMenuInventario = null;
 	private JMenuItem jMenuItemPc = null;
-	private JMenuItem jMenuItemNtb = null;
 	private JMenuItem jMenuItemImpresoras = null;
 	private JMenuItem jMenuItemHandheld = null;
 	private JMenu jMenuABM2 = null;
@@ -76,7 +75,7 @@ public class MenuPpal extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
-		this.setTitle("Menú principal                                                                                                                                                                                                  por Leonardo Baini");
+		this.setTitle(titulo);
 		this.setLocationRelativeTo(null); 
 		Inicio ini=new Inicio();
 		this.getJContentPane().removeAll();
@@ -168,7 +167,6 @@ public class MenuPpal extends JFrame {
 			jMenuInventario = new JMenu();
 			jMenuInventario.setText("Inventario");
 			jMenuInventario.add(getJMenuItemPc());
-			jMenuInventario.add(getJMenuItemNtb());
 			jMenuInventario.add(getJMenuItemImpresoras());
 			jMenuInventario.add(getJMenuItemHandheld());
 			jMenuInventario.add(getJMenuItemBam());
@@ -198,19 +196,6 @@ public class MenuPpal extends JFrame {
 	}
 
 	/**
-	 * This method initializes jMenuItemNtb	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getJMenuItemNtb() {
-		if (jMenuItemNtb == null) {
-			jMenuItemNtb = new JMenuItem();
-			jMenuItemNtb.setText("Ver Notebooks");
-		}
-		return jMenuItemNtb;
-	}
-
-	/**
 	 * This method initializes jMenuItemImpresoras	
 	 * 	
 	 * @return javax.swing.JMenuItem	
@@ -219,6 +204,15 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemImpresoras == null) {
 			jMenuItemImpresoras = new JMenuItem();
 			jMenuItemImpresoras.setText("Ver impresoras");
+			jMenuItemImpresoras.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					VerImpresoras ver=new VerImpresoras();
+					getContentPane().removeAll();
+					getContentPane().add(ver);
+					jContentPane.updateUI();
+					
+				}
+			});
 		}
 		return jMenuItemImpresoras;
 	}
