@@ -15,13 +15,13 @@ public class HandHeld extends Persistente{
 	String SECTOR_ASIGNADO;
 	String COMENTARIO;
 	String LUGAR_FISICO_REAL;
-	String DUAL;
+	String ESDUAL;
 	String GARANTIA_EXTENDIDA_HASTA;
 	private HashMap<Object, Object> todosLosAtributos;	
 	
 
 	public HandHeld(int chapa_nro, String serial, String chipMarca,
-			String modelo, String comentario, String dual,
+			String modelo, String comentario, String ESDUAL,
 			String garantia_extendida_hasta) {
 		super();
 		this.CHAPA_NRO = chapa_nro;
@@ -29,7 +29,7 @@ public class HandHeld extends Persistente{
 		this.ChipMarca = chipMarca;
 		this.modelo = modelo;
 		this.COMENTARIO = comentario;
-		this.DUAL = dual;
+		this.ESDUAL = ESDUAL;
 		this.GARANTIA_EXTENDIDA_HASTA = garantia_extendida_hasta;
 		
 		
@@ -41,7 +41,7 @@ public class HandHeld extends Persistente{
 		atributos.put("ChipMarca", getChipMarca());
 		atributos.put("modelo",getModelo());
 		atributos.put("COMENTARIO", getCOMENTARIO());
-		atributos.put("DUAL",getDUAL());
+		atributos.put("ESDUAL",getESDUAL());
 		atributos.put("GARANTIA_EXTENDIDA_HASTA", getGARANTIA_EXTENDIDA_HASTA());
 		
 		
@@ -182,17 +182,17 @@ public class HandHeld extends Persistente{
 
 
 
-	public String getDUAL() {
-		return DUAL;
+	public String getESDUAL() {
+		return ESDUAL;
 	}
 
 
 
-	public void setDUAL(String dual) {
-		this.todosLosAtributos.remove("DUAL");
-		this.todosLosAtributos.put("DUAL", dual);
+	public void setESDUAL(String ESDUAL) {
+		this.todosLosAtributos.remove("ESDUAL");
+		this.todosLosAtributos.put("ESDUAL", ESDUAL);
 		
-		this.DUAL = dual;
+		this.ESDUAL = ESDUAL;
 	}
 
 

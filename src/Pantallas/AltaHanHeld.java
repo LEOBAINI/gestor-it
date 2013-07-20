@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import Abm.AdministradorABM;
 import Base.metodosSql;
 import Objetos.HandHeld;
 
@@ -31,8 +32,6 @@ public class AltaHanHeld extends JPanel {
 	private JLabel jLabelChapa = null;
 	private JCheckBox jCheckBoxDual = null;
 	private JLabel jLabelEsDual = null;
-	private JTextField jTextFieldMarca = null;
-	private JTextField jTextFieldModelo = null;
 	private JTextField jTextFieldNroSerie = null;
 	private JTextField jTextFieldChapa = null;
 	private JButton jButtonDarAltaHheld = null;
@@ -46,6 +45,8 @@ public class AltaHanHeld extends JPanel {
 	private JLabel jLabelFormatoFecha = null;
 	private JLabel jLabelMarcaChip = null;
 	private String numeroChip="Sin chip";
+	private Choice choiceMarca = null;
+	private Choice choiceModelo = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -108,8 +109,6 @@ public class AltaHanHeld extends JPanel {
 		this.add(jLabelChapa, null);
 		this.add(getJCheckBoxDual(), null);
 		this.add(jLabelEsDual, null);
-		this.add(getJTextFieldMarca(), null);
-		this.add(getJTextFieldModelo(), null);
 		this.add(getJTextFieldNroSerie(), null);
 		this.add(getJTextFieldChapa(), null);
 		this.add(getJButtonDarAltaHheld(), null);
@@ -122,6 +121,8 @@ public class AltaHanHeld extends JPanel {
 		this.add(getJTextFieldGarantiaHasta(), null);
 		this.add(jLabelFormatoFecha, null);
 		this.add(jLabelMarcaChip, null);
+		this.add(getChoiceMarca(), null);
+		this.add(getChoiceModelo(), null);
 	}
 
 	/**
@@ -135,32 +136,6 @@ public class AltaHanHeld extends JPanel {
 			jCheckBoxDual.setBounds(new Rectangle(358, 59, 31, 25));
 		}
 		return jCheckBoxDual;
-	}
-
-	/**
-	 * This method initializes jTextFieldMarca	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getJTextFieldMarca() {
-		if (jTextFieldMarca == null) {
-			jTextFieldMarca = new JTextField();
-			jTextFieldMarca.setBounds(new Rectangle(25, 49, 139, 23));
-		}
-		return jTextFieldMarca;
-	}
-
-	/**
-	 * This method initializes jTextFieldModelo	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getJTextFieldModelo() {
-		if (jTextFieldModelo == null) {
-			jTextFieldModelo = new JTextField();
-			jTextFieldModelo.setBounds(new Rectangle(25, 121, 139, 23));
-		}
-		return jTextFieldModelo;
 	}
 
 	/**
@@ -203,13 +178,19 @@ public class AltaHanHeld extends JPanel {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					int opcion=JOptionPane.showConfirmDialog(null, "Confirme", "Está seguro que desea dar el alta?", JOptionPane.YES_NO_OPTION);
 					if(opcion==0){//"SI"
-						String marca=getJTextFieldMarca().getText();
-						String modelo=getJTextFieldModelo().getText();
+						String marca=choiceMarca.getSelectedItem();
+						String modelo=choiceModelo.getSelectedItem();
 						String nroSerie=getJTextFieldNroSerie().getText();
-						int chapaNro=Integer.parseInt(getJTextFieldChapa().getText());
+						int chapaNro=0;
+						try{
+							chapaNro=Integer.parseInt(getJTextFieldChapa().getText());
+						}catch(Exception ex){
+							JOptionPane.showMessageDialog(null,"Valor inválido,se colocará 0 por default" );
+						}
 						String esDual="NO";
-						if(getJCheckBoxDual().isEnabled())
+						if(getJCheckBoxDual().isSelected()){
 							esDual="SI";
+						}
 						String comentario=getJTextPaneComentario().getText();
 						String garantia="NO";
 						if(getJTextFieldGarantiaHasta().getText().length()>9)
@@ -223,13 +204,28 @@ public class AltaHanHeld extends JPanel {
 						HandHeld hand=new HandHeld(chapaNro, nroSerie,chipMarca ,modelo, comentario, esDual, garantia);
 						if(!chipNro.equals("Sin chip")){
 							hand.setChip(chipNro);
+							
+						}else{
+							hand.setChip("SIN CHIP");
 						}
+					AdministradorABM abm=new AdministradorABM();
+					int status=0;
+					status=abm.darDeAlta(hand, "furlong", "handheld");
+					if(status==1){
+						metodosSql metodos=new metodosSql();
+						String sentenciaSql="update chip set estado='OPERATIVO' where serial= '"+hand.getChip()+"'";
+						metodos.insertarOmodif(sentenciaSql);
+						JOptionPane.showMessageDialog(null, "Hand Held creada con éxito!");
+					}else{
+						JOptionPane.showMessageDialog(null,"Algo salió mal, no se guardaron los datos...Reintente.");
+					}
+					
 						
-					System.out.println("Eligió si!");	
+					
 					}
 					else{//"NO"
 						
-						System.out.println("Eligió no!");
+						JOptionPane.showMessageDialog(null,"La operación se canceló");
 					}
 				
 				}
@@ -360,6 +356,54 @@ public class AltaHanHeld extends JPanel {
 			jTextFieldGarantiaHasta.setText("");
 		}
 		return jTextFieldGarantiaHasta;
+	}
+
+	/**
+	 * This method initializes choiceMarca	
+	 * 	
+	 * @return java.awt.Choice	
+	 */
+	private Choice getChoiceMarca() {
+		if (choiceMarca == null) {
+			choiceMarca = new Choice();
+			choiceMarca.setBounds(new Rectangle(26, 45, 137, 24));
+			choiceMarca.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent e) {
+					choiceMarca.removeAll();
+					metodosSql metodos=new metodosSql();
+					ArrayList<String>marcas;
+					marcas=metodos.consultarUnaColumna("select distinct(marca) from modeloshandheld");
+					for(int i=0;i<marcas.size();i++)
+						choiceMarca.add(marcas.get(i));
+				}
+			});
+		}
+		return choiceMarca;
+	}
+
+	/**
+	 * This method initializes choiceModelo	
+	 * 	
+	 * @return java.awt.Choice	
+	 */
+	private Choice getChoiceModelo() {
+		if (choiceModelo == null) {
+			choiceModelo = new Choice();
+			choiceModelo.setBounds(new Rectangle(25, 117, 138, 24));
+			choiceModelo.addMouseListener(new java.awt.event.MouseAdapter() {
+				public void mouseEntered(java.awt.event.MouseEvent e) {
+					choiceModelo.removeAll();
+					metodosSql metodos=new metodosSql();
+					ArrayList<String>modelos;
+					modelos=metodos.consultarUnaColumna("select distinct(modelo) from modeloshandheld");
+					for(int i=0;i<modelos.size();i++)
+						choiceModelo.add(modelos.get(i));
+				
+				
+				}
+			});
+		}
+		return choiceModelo;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
