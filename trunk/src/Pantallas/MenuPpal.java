@@ -186,7 +186,7 @@ public class MenuPpal extends JFrame {
 			jMenuItemPc.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					VerPcs pc=new VerPcs();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(pc);
 					jContentPane.updateUI(); // 
 				}
@@ -226,6 +226,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemHandheld == null) {
 			jMenuItemHandheld = new JMenuItem();
 			jMenuItemHandheld.setText("Ver HandHelds");
+			jMenuItemHandheld.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					jContentPane.removeAll();	
+					VerHandHelds hheld=new VerHandHelds();
+					jContentPane.add(hheld);
+					jContentPane.updateUI();
+				}
+			});
 		}
 		return jMenuItemHandheld;
 	}
@@ -294,14 +302,14 @@ public class MenuPpal extends JFrame {
 			jMenuItemPCyNTB.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					AltaPcNtb pc=new AltaPcNtb();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(pc);
 					jContentPane.updateUI(); // 
 					
 					
 					
 					
-					//System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					
 				}
 			});
 		}
@@ -320,9 +328,9 @@ public class MenuPpal extends JFrame {
 			jMenuItemImpresoras2.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					AltaImpresora imp=new AltaImpresora();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(imp);
-					jContentPane.updateUI(); //  // TODO Auto-generated Event stub actionPerformed()
+					jContentPane.updateUI(); 
 				}
 			});
 		}
@@ -341,7 +349,7 @@ public class MenuPpal extends JFrame {
 			jMenuItemHandHelds.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					AltaHanHeld hand=new AltaHanHeld();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(hand);
 					jContentPane.updateUI(); // 
 				}
@@ -362,14 +370,14 @@ public class MenuPpal extends JFrame {
 			jMenuItemBajas2.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					BajaDeEquipos BE=new BajaDeEquipos();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(BE);
 					jContentPane.updateUI(); // 
 					
 					
 					
 					
-					//System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					
 				}
 			});
 		}
@@ -388,12 +396,12 @@ public class MenuPpal extends JFrame {
 			jMenuItemPcModif.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					ModifPcNtb modifPc=new ModifPcNtb();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(modifPc);
 					jContentPane.updateUI(); // 
 					
 					
-					//System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+				
 				}
 			});
 		}
@@ -412,7 +420,7 @@ public class MenuPpal extends JFrame {
 			jMenuItemImpresorasModif.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					ModifImpresoras impresora=new ModifImpresoras();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(impresora);
 					jContentPane.updateUI(); // 
 				}
@@ -430,6 +438,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemHandHeldsModif == null) {
 			jMenuItemHandHeldsModif = new JMenuItem();
 			jMenuItemHandHeldsModif.setText("HandHelds");
+			jMenuItemHandHeldsModif.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					jContentPane.removeAll();
+					ModifHheld modhand=new ModifHheld();
+					jContentPane.add(modhand);
+					jContentPane.updateUI();
+				}
+			});
 		}
 		return jMenuItemHandHeldsModif;
 	}
@@ -460,7 +476,7 @@ public class MenuPpal extends JFrame {
 			jMenuItemSalir.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					dispose();
-					//System.out.println("actionPerformed()"); // TODO Auto-generated Event stub actionPerformed()
+					
 				}
 			});
 		}
@@ -506,7 +522,7 @@ public class MenuPpal extends JFrame {
 			jMenuItemBAM.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					AltaBam aBam=new AltaBam();
-					getJContentPane().removeAll();
+					jContentPane.removeAll();
 					getContentPane().add(aBam);
 					jContentPane.updateUI(); // 
 					
@@ -590,8 +606,8 @@ public class MenuPpal extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					
 					ConsultaSQL cons=new ConsultaSQL();
-					getJContentPane().removeAll();
-					getContentPane().add(cons);
+					jContentPane.removeAll();
+					jContentPane.add(cons);
 					jContentPane.updateUI(); 
 				}
 			});
