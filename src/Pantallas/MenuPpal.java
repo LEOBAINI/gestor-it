@@ -589,6 +589,14 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemBam == null) {
 			jMenuItemBam = new JMenuItem();
 			jMenuItemBam.setText("Banda ancha movil");
+			jMenuItemBam.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+				jContentPane.removeAll();
+				VerBam vb=new VerBam();
+				jContentPane.add(vb);
+				jContentPane.updateUI();
+				}
+			});
 		}
 		return jMenuItemBam;
 	}
