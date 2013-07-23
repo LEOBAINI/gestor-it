@@ -34,8 +34,17 @@ CREATE TABLE `modelocargadores` (
   UNIQUE KEY `modelo_UNIQUE` (`modelo`),
   KEY `modeloHand` (`corresponde_a`),
   CONSTRAINT `modeloHand` FOREIGN KEY (`corresponde_a`) REFERENCES `modeloshandheld` (`modelo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modelocargadores`
+--
+
+LOCK TABLES `modelocargadores` WRITE;
+/*!40000 ALTER TABLE `modelocargadores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `modelocargadores` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -46,4 +55,4 @@ CREATE TABLE `modelocargadores` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-22 21:37:48
+-- Dump completed on 2013-07-23 14:14:36

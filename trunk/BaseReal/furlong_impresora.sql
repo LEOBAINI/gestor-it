@@ -33,6 +33,16 @@ CREATE TABLE `impresora` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `impresora`
+--
+
+LOCK TABLES `impresora` WRITE;
+/*!40000 ALTER TABLE `impresora` DISABLE KEYS */;
+INSERT INTO `impresora` VALUES ('BRSXP34597','HP','4250','MERCEDES BENZ','OF DE MARCOS FERNANDEZ');
+/*!40000 ALTER TABLE `impresora` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -43,4 +53,4 @@ CREATE TABLE `impresora` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-22 21:37:47
+-- Dump completed on 2013-07-23 14:14:35
