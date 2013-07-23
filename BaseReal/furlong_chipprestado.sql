@@ -32,6 +32,16 @@ CREATE TABLE `chipprestado` (
   PRIMARY KEY (`idChipPrestado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `chipprestado`
+--
+
+LOCK TABLES `chipprestado` WRITE;
+/*!40000 ALTER TABLE `chipprestado` DISABLE KEYS */;
+INSERT INTO `chipprestado` VALUES ('8954310106397215583','Cuca VW','A207Q0040113','De Wapro3 a Cuca x emerg Claro');
+/*!40000 ALTER TABLE `chipprestado` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -42,4 +52,4 @@ CREATE TABLE `chipprestado` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-22 21:37:48
+-- Dump completed on 2013-07-23 14:14:37

@@ -30,8 +30,18 @@ CREATE TABLE `modeloshandheld` (
   `modelo` varchar(45) NOT NULL,
   PRIMARY KEY (`idmodeloshandheld`),
   UNIQUE KEY `modelo_UNIQUE` (`modelo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modeloshandheld`
+--
+
+LOCK TABLES `modeloshandheld` WRITE;
+/*!40000 ALTER TABLE `modeloshandheld` DISABLE KEYS */;
+INSERT INTO `modeloshandheld` VALUES (5,'PSION','EP10'),(6,'PSION','WAPRO3'),(7,'PSION','WAPRO'),(8,'MOTOROLA','MC55');
+/*!40000 ALTER TABLE `modeloshandheld` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -42,4 +52,4 @@ CREATE TABLE `modeloshandheld` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-07-22 21:37:48
+-- Dump completed on 2013-07-23 14:14:36
