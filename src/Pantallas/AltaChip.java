@@ -16,6 +16,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+import Abm.AdministradorABM;
+import Objetos.Chip;
+
 @SuppressWarnings("unused")
 public class AltaChip extends JPanel {
 
@@ -31,6 +34,9 @@ public class AltaChip extends JPanel {
 	private JTextField jTextFieldCaracteres = null;
 	private JLabel jLabelCaracteres = null;
 	private JButton jButtonDarAlta = null;
+	private JLabel jLabelNroTelefono = null;
+	private JTextField jTextFieldNroTelefono = null;
+	private JLabel jLabelInfo = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -45,6 +51,12 @@ public class AltaChip extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
+		jLabelInfo = new JLabel();
+		jLabelInfo.setBounds(new Rectangle(231, 83, 182, 25));
+		jLabelInfo.setText("Campos obligatorios (*)");
+		jLabelNroTelefono = new JLabel();
+		jLabelNroTelefono.setBounds(new Rectangle(229, 32, 94, 25));
+		jLabelNroTelefono.setText("Nro de teléfono");
 		jLabelCaracteres = new JLabel();
 		jLabelCaracteres.setBounds(new Rectangle(45, 236, 159, 18));
 		jLabelCaracteres.setText("Cont caracteres MAX 30");
@@ -53,10 +65,10 @@ public class AltaChip extends JPanel {
 		jLabelComentario.setText("Comentario");
 		jLabelCompania = new JLabel();
 		jLabelCompania.setBounds(new Rectangle(15, 84, 178, 30));
-		jLabelCompania.setText("Compañia");
+		jLabelCompania.setText("Compañia (*)");
 		jLabelSimNumber = new JLabel();
-		jLabelSimNumber.setBounds(new Rectangle(14, 32, 94, 25));
-		jLabelSimNumber.setText("Numero de SIM");
+		jLabelSimNumber.setBounds(new Rectangle(14, 32, 119, 25));
+		jLabelSimNumber.setText("Numero de SIM (*)");
 		jLabelAltaChip = new JLabel();
 		jLabelAltaChip.setBounds(new Rectangle(243, 4, 131, 32));
 		jLabelAltaChip.setFont(new Font("Borg9", Font.ITALIC, 14));
@@ -73,6 +85,9 @@ public class AltaChip extends JPanel {
 		this.add(getJTextFieldCaracteres(), null);
 		this.add(jLabelCaracteres, null);
 		this.add(getJButtonDarAlta(), null);
+		this.add(jLabelNroTelefono, null);
+		this.add(getJTextFieldNroTelefono(), null);
+		this.add(jLabelInfo, null);
 	}
 
 	/**
@@ -83,7 +98,7 @@ public class AltaChip extends JPanel {
 	private JTextField getJTextFieldNroSim() {
 		if (jTextFieldNroSim == null) {
 			jTextFieldNroSim = new JTextField();
-			jTextFieldNroSim.setBounds(new Rectangle(15, 62, 193, 21));
+			jTextFieldNroSim.setBounds(new Rectangle(15, 60, 193, 19));
 		}
 		return jTextFieldNroSim;
 	}
@@ -177,8 +192,59 @@ public class AltaChip extends JPanel {
 			jButtonDarAlta.setBounds(new Rectangle(451, 53, 169, 112));
 			jButtonDarAlta.setText("Dar alta");
 			jButtonDarAlta.setIcon(new ImageIcon(getClass().getResource("/Imagenes/Chip.gif")));
+			jButtonDarAlta.addActionListener(new java.awt.event.ActionListener() {   
+				public void actionPerformed(java.awt.event.ActionEvent e) {    
+					if(jTextFieldNroSim.getText().length() < 1){
+						JOptionPane.showMessageDialog(null,"Por favor complete el número de SIM");
+					}
+					else{
+						if(getChoiceCompania().getSelectedItem().isEmpty()){
+							JOptionPane.showMessageDialog(null,"Por favor seleccione una compañia");
+							
+						}else{
+							try{
+							Chip c=new Chip(getChoiceCompania().getSelectedItem(),getJTextFieldNroSim().getText());
+							
+							c.setNroTelefono(jTextFieldNroTelefono.getText());
+							c.setComentario(getJTextPaneComentario().getText());
+							
+							AdministradorABM abm=new AdministradorABM();
+							int status=0;
+							status=abm.darDeAlta(c, "furlong", "chip");
+							if(status==1){
+								JOptionPane.showMessageDialog(null,"Éxito al cargar!");
+							}else{
+								JOptionPane.showMessageDialog(null,"Falla al cargar, reintente");
+							}
+							}catch(Exception e2){
+								JOptionPane.showMessageDialog(null, "MAL "+e2.getMessage());
+								
+							}
+							
+						}
+					
+					}
+					
+					
+					
+				}
+			
+			});
 		}
 		return jButtonDarAlta;
+	}
+
+	/**
+	 * This method initializes jTextFieldNroTelefono	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldNroTelefono() {
+		if (jTextFieldNroTelefono == null) {
+			jTextFieldNroTelefono = new JTextField();
+			jTextFieldNroTelefono.setBounds(new Rectangle(229, 60, 185, 19));
+		}
+		return jTextFieldNroTelefono;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
