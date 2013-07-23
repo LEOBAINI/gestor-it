@@ -57,6 +57,19 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemModifChip = null;
 	private JMenuItem jMenuItemBam = null;
 	private JMenuItem jMenuItemConsultaGral = null;
+	private JMenu jMenuImpresora = null;
+	private JMenuItem jMenuItemLocacion = null;
+	private JMenuItem jMenuItemStockImpresora = null;
+	private JMenu jMenuChip = null;
+	private JMenuItem jMenuItemHandHeld = null;
+	private JMenuItem jMenuItemABam = null;
+	private JMenuItem jMenuItemStock = null;
+	private JMenu jMenuPc = null;
+	private JMenuItem jMenuItemUsuario = null;
+	private JMenuItem jMenuItemNtbStock = null;
+	private JMenu jMenuHandheld = null;
+	private JMenuItem jMenuItemHandLocacion = null;
+	private JMenuItem jMenuItemHandStock = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -78,8 +91,8 @@ public class MenuPpal extends JFrame {
 		this.setTitle(titulo);
 		this.setLocationRelativeTo(null); 
 		Inicio ini=new Inicio();
-		this.getJContentPane().removeAll();
-		this.getContentPane().add(ini);
+		
+		this.jContentPane.add(ini);
 		jContentPane.updateUI();
 		
 	}
@@ -303,7 +316,7 @@ public class MenuPpal extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					AltaPcNtb pc=new AltaPcNtb();
 					jContentPane.removeAll();
-					getContentPane().add(pc);
+					jContentPane.add(pc);
 					jContentPane.updateUI(); // 
 					
 					
@@ -492,6 +505,10 @@ public class MenuPpal extends JFrame {
 		if (jMenuReasignaciones == null) {
 			jMenuReasignaciones = new JMenu();
 			jMenuReasignaciones.setText("Asignaciones");
+			jMenuReasignaciones.add(getJMenuImpresora());
+			jMenuReasignaciones.add(getJMenuChip());
+			jMenuReasignaciones.add(getJMenuPc());
+			jMenuReasignaciones.add(getJMenuHandheld());
 		}
 		return jMenuReasignaciones;
 	}
@@ -621,6 +638,192 @@ public class MenuPpal extends JFrame {
 			});
 		}
 		return jMenuItemConsultaGral;
+	}
+
+	/**
+	 * This method initializes jMenuImpresora	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenuImpresora() {
+		if (jMenuImpresora == null) {
+			jMenuImpresora = new JMenu();
+			jMenuImpresora.setText("Impresora");
+			jMenuImpresora.add(getJMenuItemLocacion());
+			jMenuImpresora.add(getJMenuItemStockImpresora());
+		}
+		return jMenuImpresora;
+	}
+
+	/**
+	 * This method initializes jMenuItemLocacion	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemLocacion() {
+		if (jMenuItemLocacion == null) {
+			jMenuItemLocacion = new JMenuItem();
+			jMenuItemLocacion.setText("A locación");
+		}
+		return jMenuItemLocacion;
+	}
+
+	/**
+	 * This method initializes jMenuItemStockImpresora	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemStockImpresora() {
+		if (jMenuItemStockImpresora == null) {
+			jMenuItemStockImpresora = new JMenuItem();
+			jMenuItemStockImpresora.setText("A stock");
+		}
+		return jMenuItemStockImpresora;
+	}
+
+	/**
+	 * This method initializes jMenuChip	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenuChip() {
+		if (jMenuChip == null) {
+			jMenuChip = new JMenu();
+			jMenuChip.setText("Chip");
+			jMenuChip.add(getJMenuItemHandHeld());
+			jMenuChip.add(getJMenuItemABam());
+			jMenuChip.add(getJMenuItemStock());
+		}
+		return jMenuChip;
+	}
+
+	/**
+	 * This method initializes jMenuItemHandHeld	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemHandHeld() {
+		if (jMenuItemHandHeld == null) {
+			jMenuItemHandHeld = new JMenuItem();
+			jMenuItemHandHeld.setText("A hand held");
+			jMenuItemHandHeld.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					AsigNacChipAHand chiphand=new AsigNacChipAHand();
+					jContentPane.removeAll();
+					jContentPane.add(chiphand);
+					jContentPane.updateUI();
+				}
+			});
+		}
+		return jMenuItemHandHeld;
+	}
+
+	/**
+	 * This method initializes jMenuItemABam	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemABam() {
+		if (jMenuItemABam == null) {
+			jMenuItemABam = new JMenuItem();
+			jMenuItemABam.setText("A bam");
+		}
+		return jMenuItemABam;
+	}
+
+	/**
+	 * This method initializes jMenuItemStock	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemStock() {
+		if (jMenuItemStock == null) {
+			jMenuItemStock = new JMenuItem();
+			jMenuItemStock.setText("A stock");
+		}
+		return jMenuItemStock;
+	}
+
+	/**
+	 * This method initializes jMenuPc	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenuPc() {
+		if (jMenuPc == null) {
+			jMenuPc = new JMenu();
+			jMenuPc.setText("Pc y Notebook");
+			jMenuPc.add(getJMenuItemUsuario());
+			jMenuPc.add(getJMenuItemNtbStock());
+		}
+		return jMenuPc;
+	}
+
+	/**
+	 * This method initializes jMenuItemUsuario	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemUsuario() {
+		if (jMenuItemUsuario == null) {
+			jMenuItemUsuario = new JMenuItem();
+			jMenuItemUsuario.setText("A usuario");
+		}
+		return jMenuItemUsuario;
+	}
+
+	/**
+	 * This method initializes jMenuItemNtbStock	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemNtbStock() {
+		if (jMenuItemNtbStock == null) {
+			jMenuItemNtbStock = new JMenuItem();
+			jMenuItemNtbStock.setText("A stock");
+		}
+		return jMenuItemNtbStock;
+	}
+
+	/**
+	 * This method initializes jMenuHandheld	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenuHandheld() {
+		if (jMenuHandheld == null) {
+			jMenuHandheld = new JMenu();
+			jMenuHandheld.setText("Hand held");
+			jMenuHandheld.add(getJMenuItemHandLocacion());
+			jMenuHandheld.add(getJMenuItemHandStock());
+		}
+		return jMenuHandheld;
+	}
+
+	/**
+	 * This method initializes jMenuItemHandLocacion	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemHandLocacion() {
+		if (jMenuItemHandLocacion == null) {
+			jMenuItemHandLocacion = new JMenuItem();
+			jMenuItemHandLocacion.setText("A locación");
+		}
+		return jMenuItemHandLocacion;
+	}
+
+	/**
+	 * This method initializes jMenuItemHandStock	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemHandStock() {
+		if (jMenuItemHandStock == null) {
+			jMenuItemHandStock = new JMenuItem();
+			jMenuItemHandStock.setText("A stock");
+		}
+		return jMenuItemHandStock;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
