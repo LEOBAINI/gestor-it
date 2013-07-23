@@ -9,12 +9,17 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import Abm.AdministradorABM;
 import Base.metodosSql;
+import Objetos.Bam;
+
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
+import java.awt.Choice;
 
 @SuppressWarnings("unused")
 public class AltaBam extends JPanel {
@@ -28,12 +33,9 @@ public class AltaBam extends JPanel {
 	private JLabel jLabelImei = null;
 	private JTextField jTextFieldMarca = null;
 	private JTextField jTextFieldModelo = null;
-	private JTextField jTextFieldProveedor = null;
 	private JTextField jTextFieldImei = null;
 	private JButton jButtonDarAltaBam = null;
-	private JTextPane jTextPaneSugerencias = null;
-	private JLabel jLabelInfo = null;
-	private JScrollPane jScrollPaneRuedita = null;
+	private Choice choiceProveedorPred = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -48,9 +50,6 @@ public class AltaBam extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
-		jLabelInfo = new JLabel();
-		jLabelInfo.setBounds(new Rectangle(217, 47, 31, 25));
-		jLabelInfo.setText("Info");
 		jLabelImei = new JLabel();
 		jLabelImei.setBounds(new Rectangle(13, 204, 175, 17));
 		jLabelImei.setText("Imei");
@@ -81,11 +80,9 @@ public class AltaBam extends JPanel {
 		this.add(jLabelImei, null);
 		this.add(getJTextFieldMarca(), null);
 		this.add(getJTextFieldModelo(), null);
-		this.add(getJTextFieldProveedor(), null);
 		this.add(getJTextFieldImei(), null);
 		this.add(getJButtonDarAltaBam(), null);
-		this.add(jLabelInfo, null);
-		this.add(getJScrollPaneRuedita(), null);
+		this.add(getChoiceProveedorPred(), null);
 	}
 
 	/**
@@ -97,29 +94,8 @@ public class AltaBam extends JPanel {
 		if (jTextFieldMarca == null) {
 			jTextFieldMarca = new JTextField();
 			jTextFieldMarca.setBounds(new Rectangle(13, 41, 175, 17));
-			jTextFieldMarca.addKeyListener(new java.awt.event.KeyAdapter() {
-				public void keyReleased(java.awt.event.KeyEvent e) {
-					int code=e.getKeyCode();
-					if(code!=KeyEvent.VK_BACK_SPACE ){
-					metodosSql metodos=new metodosSql();
-					String campo=jTextFieldMarca.getText();
-					System.out.println(campo);
-					try {
-						jTextPaneSugerencias.setText("");
-						String relleno=metodos.consultarUnaColumna("SELECT nombre  FROM furlong.notebook where nombre like '"+campo+"%';").get(0).toString();
-						jTextFieldMarca.setText(relleno);
-						jTextPaneSugerencias.setText("Se autocompletó con:\n"+relleno);
-						System.out.println("keyReleased()");
-						
-					} catch (Exception e2) {
-						jTextPaneSugerencias.setText("No hay sugerencias");// TODO: handle exception
-					}
-					 // used to consumed the key in the keytyped event
-						}
-
-					// TODO Auto-generated Event stub keyReleased()
-				}
-			});
+			
+				
 		}
 		return jTextFieldMarca;
 	}
@@ -135,19 +111,6 @@ public class AltaBam extends JPanel {
 			jTextFieldModelo.setBounds(new Rectangle(13, 104, 175, 17));
 		}
 		return jTextFieldModelo;
-	}
-
-	/**
-	 * This method initializes jTextFieldProveedor	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getJTextFieldProveedor() {
-		if (jTextFieldProveedor == null) {
-			jTextFieldProveedor = new JTextField();
-			jTextFieldProveedor.setBounds(new Rectangle(13, 168, 175, 17));
-		}
-		return jTextFieldProveedor;
 	}
 
 	/**
@@ -175,11 +138,44 @@ public class AltaBam extends JPanel {
 			jButtonDarAltaBam.setText("Dar alta");
 			jButtonDarAltaBam.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					int status=0;
+					metodosSql metodos=new metodosSql();
 					String marca=jTextFieldMarca.getText();
 					String modelo=jTextFieldModelo.getText();
-					String proveedor=jTextFieldProveedor.getText();
+					String proveedor=choiceProveedorPred.getSelectedItem();
 					String imei=jTextFieldImei.getText();
-					System.out.println(marca+modelo+proveedor+imei);
+					if(marca.length()==0 ||modelo.length()==0||imei.length()==0){
+						JOptionPane.showMessageDialog(null,"Hay campos vaciós, corrija");
+					}else{
+					Bam b=new Bam(imei.toUpperCase(),marca.toUpperCase(),modelo.toUpperCase(),proveedor.toUpperCase());
+					String sentenciaSql="insert into registrodebam" +
+							" (locacion,solicitante,imei,proveedor_predet)" +
+							" values('COMPUTOS','SIN SOLIC','"+b.getImei()+"','"+b.getProveedor()+"');";
+					AdministradorABM abm=new AdministradorABM();
+					
+					status=status+abm.darDeAlta(b, "furlong", "bam");
+					
+					
+					if(status==1){
+						
+						
+						
+						status=status+metodos.insertarOmodif(sentenciaSql);
+						if(status==2){
+							JOptionPane.showMessageDialog(null, "Éxito al cargar los datos");
+							
+						}else{
+							metodos.insertarOmodif("delete FROM furlong.bam where imei='"+b.getImei()+"'; delete FROM furlong.registrodebam where imei='"+b.getImei()+"';");
+							JOptionPane.showMessageDialog(null,"Los datos no se cargaron porque no se pudo ejecutar --> "+sentenciaSql);
+						}
+						
+						
+					}else{
+						//
+						JOptionPane.showMessageDialog(null,"Hubo un problema al cargar los datos,reintente");
+						
+					}
+					}
 					
 				}
 			});
@@ -188,30 +184,20 @@ public class AltaBam extends JPanel {
 	}
 
 	/**
-	 * This method initializes jTextPaneSugerencias	
+	 * This method initializes choiceProveedorPred	
 	 * 	
-	 * @return javax.swing.JTextPane	
+	 * @return java.awt.Choice	
 	 */
-	private JTextPane getJTextPaneSugerencias() {
-		if (jTextPaneSugerencias == null) {
-			jTextPaneSugerencias = new JTextPane();
-			jTextPaneSugerencias.setEditable(false);
+	private Choice getChoiceProveedorPred() {
+		if (choiceProveedorPred == null) {
+			choiceProveedorPred = new Choice();
+			choiceProveedorPred.setBounds(new Rectangle(14, 165, 173, 21));
+			choiceProveedorPred.add("Movistar");
+			choiceProveedorPred.add("Claro");
+			choiceProveedorPred.add("Personal");
+			choiceProveedorPred.add("Otro");
 		}
-		return jTextPaneSugerencias;
-	}
-
-	/**
-	 * This method initializes jScrollPaneRuedita	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollPaneRuedita() {
-		if (jScrollPaneRuedita == null) {
-			jScrollPaneRuedita = new JScrollPane();
-			jScrollPaneRuedita.setBounds(new Rectangle(217, 77, 240, 61));
-			jScrollPaneRuedita.setViewportView(getJTextPaneSugerencias());
-		}
-		return jScrollPaneRuedita;
+		return choiceProveedorPred;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

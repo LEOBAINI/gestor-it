@@ -105,7 +105,7 @@ public class VerBam extends JPanel {
 			jButtonGral.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					metodosSql metodos=new metodosSql();
-					String query="select * from bam";
+					String query="select * from registrodebam";
 					
 					metodos.llenarJtable(jTableBam, query);
 					jTextFieldFilas.setText(String.valueOf(jTableBam.getRowCount()));
@@ -130,7 +130,7 @@ public class VerBam extends JPanel {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					metodosSql metodos=new metodosSql();
 					String query="SELECT b.locacion,b.solicitante,b.chipnro,c.nrotelefono,c.marca,b.imei " +
-							" FROM furlong.bam b,furlong.chip c where b.chipnro=c.serial;";
+							" FROM furlong.registrodebam b,furlong.chip c where b.chipnro=c.serial;";
 					
 					metodos.llenarJtable(jTableBam, query);
 					jTextFieldFilas.setText(String.valueOf(jTableBam.getRowCount()));
@@ -153,7 +153,7 @@ public class VerBam extends JPanel {
 			jButtonSinChip.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					metodosSql metodos=new metodosSql();
-					String query="SELECT * from bam where chipnro is null;";
+					String query="SELECT * from registrodebam where chipnro is null;";
 					
 					metodos.llenarJtable(jTableBam, query);
 					jTextFieldFilas.setText(String.valueOf(jTableBam.getRowCount()));
@@ -179,7 +179,7 @@ public class VerBam extends JPanel {
 			jButtonEnStock.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					metodosSql metodos=new metodosSql();
-					String query="SELECT * from bam where locacion= 'computos';";
+					String query="SELECT * from registrodebam where locacion= 'computos';";
 					
 					metodos.llenarJtable(jTableBam, query);
 					jTextFieldFilas.setText(String.valueOf(jTableBam.getRowCount()));
