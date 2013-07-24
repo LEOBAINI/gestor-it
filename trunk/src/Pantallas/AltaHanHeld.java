@@ -181,9 +181,9 @@ public class AltaHanHeld extends JPanel {
 						String marca=choiceMarca.getSelectedItem();
 						String modelo=choiceModelo.getSelectedItem();
 						String nroSerie=getJTextFieldNroSerie().getText();
-						int chapaNro=0;
+						String chapaNro=null;
 						try{
-							chapaNro=Integer.parseInt(getJTextFieldChapa().getText());
+							chapaNro=getJTextFieldChapa().getText();
 						}catch(Exception ex){
 							JOptionPane.showMessageDialog(null,"Valor inválido,se colocará 0 por default" );
 						}
