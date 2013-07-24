@@ -184,17 +184,24 @@ public class ModifHheld extends JPanel {
 			jButtonModificarHheld.setText("MODIFICAR");
 			jButtonModificarHheld.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try{
 					String serialOrig=choiceListadoSeriales.getSelectedItem();
 					int opcion=JOptionPane.showConfirmDialog(null, "Confirme MODIFICAR el elemento "+serialOrig+" ?", "Está seguro?", JOptionPane.YES_NO_OPTION);
 					if(opcion==0){//"SI"
 						
 						String modelo=choiceModelo.getSelectedItem();
 						String nroSerie=getJTextFieldNroSerie().getText();
-						int chapaNro=0;
+						String chapaNro = null;
 						try{
-							chapaNro=Integer.parseInt(getJTextFieldChapa().getText());
+							if(!getJTextFieldChapa().getText().isEmpty()){
+							chapaNro=getJTextFieldChapa().getText();
+							}else{
+								chapaNro=null;
+							}
+							
 						}catch(Exception ex){
-							JOptionPane.showMessageDialog(null,"Valor inválido,se colocará 0 por default" );
+							
+							JOptionPane.showMessageDialog(null,"Error en Chapa" );
 						}
 						String esDual="NO";
 						if(getJCheckBoxDual().isSelected()){
@@ -239,6 +246,10 @@ public class ModifHheld extends JPanel {
 					else{//"NO"
 						
 						JOptionPane.showMessageDialog(null,"La operación se canceló");
+					}
+					}catch(Exception e1){
+						JOptionPane.showMessageDialog(null,e1.getMessage());
+						
 					}
 				
 				}

@@ -6,7 +6,7 @@ import Abm.Persistente;
 
 public class HandHeld extends Persistente{
 	
-	int CHAPA_NRO;
+	String CHAPA_NRO;
 	String serial;
 	String chip;
 	String ChipMarca;
@@ -20,7 +20,7 @@ public class HandHeld extends Persistente{
 	private HashMap<Object, Object> todosLosAtributos;	
 	
 
-	public HandHeld(int chapa_nro, String serial, String chipMarca,
+	public HandHeld(String chapa_nro, String serial, String chipMarca,
 			String modelo, String comentario, String ESDUAL,
 			String garantia_extendida_hasta) {
 		super();
@@ -51,13 +51,13 @@ public class HandHeld extends Persistente{
 	
 	
 
-	public int getCHAPA_NRO() {
+	public String getCHAPA_NRO() {
 		return CHAPA_NRO;
 	}
 
 
 
-	public void setCHAPA_NRO(int chapa_nro) {
+	public void setCHAPA_NRO(String chapa_nro) {
 		this.CHAPA_NRO = chapa_nro;
 		this.todosLosAtributos.remove("CHAPA_NRO");
 		this.todosLosAtributos.put("CHAPA_NRO", chapa_nro);

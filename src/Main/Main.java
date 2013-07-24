@@ -24,7 +24,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		MenuPpal menu=new MenuPpal();
+		/*MenuPpal menu=new MenuPpal();
 		
 		
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
@@ -42,7 +42,8 @@ public class Main {
 			JOptionPane.showMessageDialog(null,"Asegurese que responda el ping a "+con.getHost()+" y que la base se llame, furlong.\n" +
 					"El usuario debe ser root y la contraseña root" );
 		}
-
+*/
+		
 		
 		}
 		
