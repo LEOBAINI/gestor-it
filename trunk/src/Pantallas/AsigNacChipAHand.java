@@ -305,7 +305,8 @@ public class AsigNacChipAHand extends JPanel {
 								System.out.println(opcion);
 							
 						}if(estadoChip.equalsIgnoreCase("OPERATIVO")){
-							int opcion=JOptionPane.showConfirmDialog(null, "Chip YA OPERATIVO, seguro que quiere REASIGNARLO?");
+							String usuario = null,locacion = null,aparato=null;
+							int opcion=JOptionPane.showConfirmDialog(null, "Chip YA OPERATIVO,lo usaba la "+aparato+" "+usuario+" en "+locacion+" seguro que quiere REASIGNARLO?, "+usuario+" quedará sin chip...");
 							System.out.println(opcion);
 						}if(estadoChip.equalsIgnoreCase("DESTRUIDO")){
 							
