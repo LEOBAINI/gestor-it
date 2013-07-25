@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import java.awt.Rectangle;
 import java.awt.Choice;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
@@ -242,11 +244,81 @@ public class AsigNacChipAHand extends JPanel {
 			Asignar.setText("Asignar");
 			Asignar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-				
+					try{
+					metodosSql metodos=new metodosSql();
 					
 					String serieHand=choiceSerieHand.getSelectedItem();
 					String serieChip=choiceNroChip.getSelectedItem();
 					if(!serieHand.equals(null)&&!serieChip.equals(null)){
+						
+						String estadoChip=metodos.estadoDeChip(serieChip);
+						String chipDeLaHand=metodos.chipDeLaHandHeld(serieHand);
+						//SI EL CHIP ESTA EN STOCK
+						 if(estadoChip.equalsIgnoreCase("EN STOCK*")){
+							 //SI LA HANDHELD NO TIENE CHIP
+							if(chipDeLaHand==null){
+								int status=0;
+								status=metodos.AsignarChipAHand(serieChip,serieHand);
+								if(status==1){
+									JOptionPane.showMessageDialog(null,"Asignación correcta");
+								}else{
+									JOptionPane.showMessageDialog(null,"Hubo un problema verifique coherencia de datos.Reportelo urgentemente\n" +
+											" verifique estado en chip con serial "+serieChip+" y handheld con serial "+serieHand);
+									
+								}
+							}//SI LA HANDHELD YA TIENE CHIP?
+							else{
+								int pregunta=JOptionPane.showConfirmDialog(null, "La HAND HELD ya tiene CHIP, seguro que quiere REASIGNARLE UN CHIP???");
+								String[] estados = { "EN STOCK*", "UNKNOWN", "DADO DE BAJA", "DESTRUIDO" };
+
+								switch(pregunta){
+								case 0:
+									int status=0;
+									String nuevoEstadoDelChip= (String) JOptionPane.showInputDialog(null, 
+									        "Que estado tendrá el antigüo chip?",
+									        "Estado del antigüo chip",
+									        JOptionPane.QUESTION_MESSAGE, 
+									        null, 
+									        estados, 
+									        estados[0]);
+									String nuevoComentarioDelChip=JOptionPane.showInputDialog("Coloque un comentario corto");
+
+									status=metodos.reAsignarChipAHand(serieChip, serieHand, nuevoEstadoDelChip, nuevoComentarioDelChip);
+									if(status==1){
+										JOptionPane.showMessageDialog(null,"Datos cargados con éxito!");
+									}else{
+										JOptionPane.showMessageDialog(null,"Error, verifique asignación");
+									}
+									break;//si
+								case 1:JOptionPane.showMessageDialog(null,"Ok, no haré cambios");break;//si;//no
+								case 2:JOptionPane.showMessageDialog(null,"Jamás estuve aquí....");break;//si;//cancelar
+								}
+							}
+							
+							
+							
+						}// FIN SI EL CHIP ESTA EN STOCK*
+						 
+						 
+						 if(estadoChip.equalsIgnoreCase("DADO DE BAJA")){
+							 int opcion=JOptionPane.showConfirmDialog(null, "Chip esta DADO DE BAJA, seguro que quiere REASIGNARLO?");
+								System.out.println(opcion);
+							
+						}if(estadoChip.equalsIgnoreCase("OPERATIVO")){
+							int opcion=JOptionPane.showConfirmDialog(null, "Chip YA OPERATIVO, seguro que quiere REASIGNARLO?");
+							System.out.println(opcion);
+						}if(estadoChip.equalsIgnoreCase("DESTRUIDO")){
+							
+						}
+						if(!estadoChip.equalsIgnoreCase("DESTRUIDO")
+								&&!estadoChip.equalsIgnoreCase("EN STOCK*")
+								&&!estadoChip.equalsIgnoreCase("OPERATIVO")
+								&&!estadoChip.equalsIgnoreCase("UNKNOWN")
+								&&!estadoChip.equalsIgnoreCase("DADO DE BAJA")){
+							JOptionPane.showMessageDialog(null,"CORRIJA ESTADO DEL CHIP: "+estadoChip);
+						}
+						
+						
 						
 						//SI EL CHIP ESTÁ OPERATIVO(NO EN STOCK)
 						//EL APARATO QUE LO PORTABA, QUEDA SIN CHIP.
@@ -265,30 +337,15 @@ public class AsigNacChipAHand extends JPanel {
 						
 						
 						
-						
-					}
 					
-					
-					
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+					}	
+				}catch(Exception e1){
+					JOptionPane.showMessageDialog(null,"No pueden quedar vacios!", "ERROR!!! revise los campos :( ", JOptionPane.ERROR_MESSAGE);
+
 				
 				
 				}
+			}
 			});
 		}
 		return Asignar;

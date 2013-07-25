@@ -311,7 +311,57 @@ public class metodosSql extends ConexionMySql {
 		
 		}
 	}
-	
+	public String estadoDeChip(String serie){
+		
+		
+		return consultarUnaColumna("select estado from chip where serial='"+serie+"'").get(0);
+	}
+	public String chipDeLaHandHeld(String serieDeLaHandHeld){
+		
+		
+		return consultarUnaColumna("select chip from handheld where serial= '"+serieDeLaHandHeld+"'").get(0);
+		
+	}
+	/**
+	 * 
+	 * @param serieChip
+	 * @param serieHand
+	 * @return Si asignó correctamente todos los valores, devolverá 1 sino -1.
+	 */
+
+	public int AsignarChipAHand(String serieChip, String serieHand) {
+		int status=0;
+		String marcaChip=consultarUnaColumna("select marca from chip where serial= '"+serieChip+"'" ).get(0);
+		//colocar chip en columna chipnro en hand
+		status=status+insertarOmodif("update handheld set chip = '"+serieChip+"' " +
+				"where serial= '"+serieHand+"'");
+		//colocar marca del chip en la columna de hand
+		status=status+insertarOmodif("update handheld set chipmarca = '"+marcaChip+"' where serial= '"+serieHand+"'");
+		//cambiar el estado del chip en chip a operativo mayus.
+		status=status+insertarOmodif("update chip set estado ='OPERATIVO' where serial= '"+serieChip+"'");
+		if(status==3){
+			status=1;
+		}else{
+			status=-1;
+		}
+		return status;
+		
+		
+	}
+	public int reAsignarChipAHand(String serieChip, String serieHand,String nuevoEstadoDelChip,String nuevoComentarioDelChip){
+		int status=0;
+		String serieChipViejo=consultarUnaColumna("select chip from handheld where serial= '"+serieHand+"'").get(0);
+		status=status+insertarOmodif("update chip set estado ='"+nuevoEstadoDelChip+"'," +
+				" comentario='"+nuevoComentarioDelChip+"' where serial= '"+serieChipViejo+"'");
+		status=status+AsignarChipAHand(serieChip, serieHand);
+		if(status==2){
+			status=1;
+		}else{
+			status=-1;
+		}
+		return status;
+	}
+
 	
 	
 
