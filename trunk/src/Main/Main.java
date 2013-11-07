@@ -29,10 +29,10 @@ public class Main {
 		
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		menu.setVisible(true);
-		String host=JOptionPane.showInputDialog("Ingrese la ip del host o nombre del mismo");
+		/*String host=JOptionPane.showInputDialog("Ingrese la ip del host o nombre del mismo");
 		if(host!=null){
 			ConexionMySql.host=host;
-		}
+		}*/
 		ConexionMySql con=new ConexionMySql();
 		if(con.conectar()==1){
 			menu.setTitle("Software de Gestión construido por y para profesionales IT                                       PRUEBA DE CONEXIÓN OK, CONECTADO A "+con.getHost()+" BASE DE DATOS "+con.getBase());
