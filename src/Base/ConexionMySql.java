@@ -53,7 +53,7 @@ public class ConexionMySql {
             try{
             	
                 Class.forName(driver);
-                c=DriverManager.getConnection(cadena,"root","root");
+                c=DriverManager.getConnection(cadena,"gestorit","zayb9183");
                  statemente=c.createStatement();
                //  System.out.println("Conectado OK");
                status=1;
