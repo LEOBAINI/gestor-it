@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -664,6 +666,15 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemLocacion == null) {
 			jMenuItemLocacion = new JMenuItem();
 			jMenuItemLocacion.setText("A locación");
+			jMenuItemLocacion.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+				
+					JOptionPane.showMessageDialog(null,"En construccion");
+				
+				
+				
+				}
+			});
 		}
 		return jMenuItemLocacion;
 	}
