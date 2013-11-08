@@ -48,6 +48,10 @@ public class ModifImpresoras extends JPanel {
 	private JButton jButtonSQL = null;
 	private JButton jButtonEjemplo = null;
 	private JButton jButtonEjemplo1 = null;
+	private JTextField jTextFieldLocacion = null;
+	private JTextField jTextFieldSector = null;
+	private JLabel jLabel = null;
+	private JLabel jLabel1LOcacion = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -67,6 +71,12 @@ public class ModifImpresoras extends JPanel {
 		
 		
 		
+		jLabel1LOcacion = new JLabel();
+		jLabel1LOcacion.setBounds(new Rectangle(22, 237, 132, 15));
+		jLabel1LOcacion.setText("Locacion");
+		jLabel = new JLabel();
+		jLabel.setBounds(new Rectangle(22, 185, 132, 16));
+		jLabel.setText("Sector");
 		jLabelListado = new JLabel();
 		jLabelListado.setBounds(new Rectangle(217, 196, 156, 21));
 		jLabelListado.setText("Listado");
@@ -81,13 +91,13 @@ public class ModifImpresoras extends JPanel {
 		jLabelImpresora.setIcon(new ImageIcon(getClass().getResource("/Imagenes/impresora.jpg")));
 		jLabelImpresora.setText("");
 		jLabelModelo = new JLabel();
-		jLabelModelo.setBounds(new Rectangle(21, 174, 71, 16));
+		jLabelModelo.setBounds(new Rectangle(22, 132, 132, 16));
 		jLabelModelo.setText("Modelo");
 		jLabelMarca = new JLabel();
-		jLabelMarca.setBounds(new Rectangle(21, 111, 71, 24));
+		jLabelMarca.setBounds(new Rectangle(22, 71, 132, 24));
 		jLabelMarca.setText("Marca");
 		jLabelNroSerie = new JLabel();
-		jLabelNroSerie.setBounds(new Rectangle(21, 45, 71, 26));
+		jLabelNroSerie.setBounds(new Rectangle(22, 8, 132, 26));
 		jLabelNroSerie.setText("Nro de serie");
 		jLabelAltaImpresora = new JLabel();
 		jLabelAltaImpresora.setBounds(new Rectangle(159, 10, 246, 35));
@@ -116,6 +126,10 @@ public class ModifImpresoras extends JPanel {
 		this.add(getJButtonSQL(), null);
 		this.add(getJButtonEjemplo(), null);
 		this.add(getJButtonEjemplo1(), null);
+		this.add(getJTextFieldLocacion(), null);
+		this.add(getJTextFieldSector(), null);
+		this.add(jLabel, null);
+		this.add(jLabel1LOcacion, null);
 	}
 
 	/**
@@ -126,7 +140,7 @@ public class ModifImpresoras extends JPanel {
 	private JTextField getJTextFieldNroSerie() {
 		if (jTextFieldNroSerie == null) {
 			jTextFieldNroSerie = new JTextField();
-			jTextFieldNroSerie.setBounds(new Rectangle(21, 76, 176, 21));
+			jTextFieldNroSerie.setBounds(new Rectangle(22, 42, 132, 21));
 			jTextFieldNroSerie.setEditable(false);
 		}
 		return jTextFieldNroSerie;
@@ -140,7 +154,7 @@ public class ModifImpresoras extends JPanel {
 	private JTextField getJTextFieldMarca() {
 		if (jTextFieldMarca == null) {
 			jTextFieldMarca = new JTextField();
-			jTextFieldMarca.setBounds(new Rectangle(21, 141, 176, 21));
+			jTextFieldMarca.setBounds(new Rectangle(22, 103, 132, 21));
 		}
 		return jTextFieldMarca;
 	}
@@ -153,7 +167,7 @@ public class ModifImpresoras extends JPanel {
 	private JTextField getJTextFieldModelo() {
 		if (jTextFieldModelo == null) {
 			jTextFieldModelo = new JTextField();
-			jTextFieldModelo.setBounds(new Rectangle(21, 199, 176, 21));
+			jTextFieldModelo.setBounds(new Rectangle(22, 156, 132, 21));
 		}
 		return jTextFieldModelo;
 	}
@@ -174,14 +188,18 @@ public class ModifImpresoras extends JPanel {
 					String nroSerie=jTextFieldNroSerie.getText();
 					String marca=jTextFieldMarca.getText();
 					String modelo=jTextFieldModelo.getText();
+					String ubicacion=jTextFieldLocacion.getText();
+					String sector=jTextFieldSector.getText();
 					if(nroSerie.isEmpty() || marca.isEmpty() || modelo.isEmpty()){
 						JOptionPane.showMessageDialog(null, "Hay campos vacios, reintente");
 					}else{
 					AdministradorABM abm=new AdministradorABM();
 					Impresora imp=new Impresora(nroSerie.toUpperCase(),marca.toUpperCase(),modelo.toUpperCase());
+					imp.setSector(sector);
+					imp.setUbicacion(ubicacion);
 					int status=	abm.modificar(imp, "furlong", "impresora");
 					if(status==1){
-						JOptionPane.showMessageDialog(null, "Impresora agregada correctamente");
+						JOptionPane.showMessageDialog(null, "Impresora modificada correctamente");
 					}else{
 						JOptionPane.showMessageDialog(null, "Hubo un problema, los datos no se cargaron reintente");
 					}
@@ -224,9 +242,14 @@ public class ModifImpresoras extends JPanel {
 						String serie=campos.get(0);
 						String marca=campos.get(1);
 						String modelo=campos.get(2);
+						String locacion=campos.get(3);
+						String sector=campos.get(4);
 						jTextFieldNroSerie.setText(serie);
 						jTextFieldMarca.setText(marca);
 						jTextFieldModelo.setText(modelo);
+						jTextFieldSector.setText(sector);
+						jTextFieldLocacion.setText(locacion);
+						
 					}
 				}
 			});
@@ -349,6 +372,32 @@ public class ModifImpresoras extends JPanel {
 			});
 		}
 		return jButtonEjemplo1;
+	}
+
+	/**
+	 * This method initializes jTextFieldLocacion	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldLocacion() {
+		if (jTextFieldLocacion == null) {
+			jTextFieldLocacion = new JTextField();
+			jTextFieldLocacion.setBounds(new Rectangle(22, 209, 132, 20));
+		}
+		return jTextFieldLocacion;
+	}
+
+	/**
+	 * This method initializes jTextFieldSector	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldSector() {
+		if (jTextFieldSector == null) {
+			jTextFieldSector = new JTextField();
+			jTextFieldSector.setBounds(new Rectangle(22, 260, 132, 21));
+		}
+		return jTextFieldSector;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
