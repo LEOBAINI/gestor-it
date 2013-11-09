@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="10" version="2.0">
 <workbenchAdvisor/>
-<window height="740" width="1024" x="154" y="0">
+<window height="738" width="1024" x="514" y="4">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ve.internal.java.codegen.editorpart.XMLViewPart"/>
 </fastViewData>
@@ -10,18 +10,18 @@
 </perspectiveBar>
 <coolbarLayout locked="0">
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="98" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="99" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="124" y="22"/>
-<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="98" y="22"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="74" y="22"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="129" y="22"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="99" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="76" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="185" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page aggregateWorkingSetId="Aggregate for window 1372309332325" focus="true" label="Workspace - Java">
+<page aggregateWorkingSetId="Aggregate for window 1383969800527" focus="true" label="Workspace - Java">
 <editors>
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
@@ -36,7 +36,7 @@
 <view id="org.eclipse.ve.internal.java.codegen.editorpart.XMLViewPart" partName="VE Model: XMI View"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<columnWidths org.eclipse.ui.ide.locationField="54" org.eclipse.ui.ide.markerType="79" org.eclipse.ui.ide.pathField="104" org.eclipse.ui.ide.resourceField="79" org.eclipse.ui.ide.severityAndDescriptionField="250"/>
+<columnWidths org.eclipse.ui.ide.locationField="64" org.eclipse.ui.ide.markerType="94" org.eclipse.ui.ide.pathField="124" org.eclipse.ui.ide.resourceField="94" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -90,7 +90,6 @@
 <alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
-<alwaysOnActionSet id="eclipseme.ui.actionSet.support"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
@@ -155,7 +154,7 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@92bdf6" ratio="0.75" ratioLeft="756" ratioRight="252" relationship="2" relative="left">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@12e1584" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="left">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
@@ -163,8 +162,8 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.gef.ui.palette_view" ratio="0.25" ratioLeft="252" ratioRight="756" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.7496038" ratioLeft="473" ratioRight="158" relationship="4" relative="org.eclipse.gef.ui.palette_view">
+<info part="org.eclipse.gef.ui.palette_view" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.7487844" ratioLeft="462" ratioRight="155" relationship="4" relative="org.eclipse.gef.ui.palette_view">
 <folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -181,7 +180,7 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="right" ratio="0.75" ratioLeft="567" ratioRight="189" relationship="2" relative="org.eclipse.gef.ui.palette_view">
+<info folder="true" part="right" ratio="0.7493333" ratioLeft="562" ratioRight="188" relationship="2" relative="org.eclipse.gef.ui.palette_view">
 <folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
@@ -191,8 +190,8 @@
 </presentation>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.15873016" ratioLeft="90" ratioRight="477" relationship="2" relative="org.eclipse.gef.ui.palette_view"/>
-<info part="org.eclipse.ve.internal.java.codegen.editorpart.BeansList" ratio="0.49920762" ratioLeft="315" ratioRight="316" relationship="4" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.15836298" ratioLeft="89" ratioRight="473" relationship="2" relative="org.eclipse.gef.ui.palette_view"/>
+<info part="org.eclipse.ve.internal.java.codegen.editorpart.BeansList" ratio="0.49918962" ratioLeft="308" ratioRight="309" relationship="4" relative="left"/>
 </mainWindow>
 </layout>
 </perspective>
