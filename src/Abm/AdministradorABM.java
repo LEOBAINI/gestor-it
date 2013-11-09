@@ -23,7 +23,7 @@ public class AdministradorABM {
 	}
 	public int modificar(Persistente objeto,String base,String tabla){
 		metodosSql metodos=new metodosSql();
-		return metodos.modificarObjetoDeLaBase(objeto, base, tabla);
+		return metodos.updateObjetoDelaBase(objeto, base, tabla);
 		
 	}
 	

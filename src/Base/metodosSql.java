@@ -24,6 +24,28 @@ public class metodosSql extends ConexionMySql {
 	public metodosSql() {
 	}
 	
+	public  int updateObjetoDelaBase(Persistente objeto,String base,String tabla){
+		int status=-1;
+		String atributos=formatearParaMySql(objeto.todosLosAtributos()).toString().replace('{', ' ').replace('}', ' ');
+		
+		
+		
+		String sentencia="update `"+base+"`.`"+tabla+"` SET "+atributos+" WHERE `"+objeto.identificadorUnico()+"` ='"+objeto.getPK()+"';";	
+		
+		System.out.println(sentencia);
+		
+		/*Lo que hay que lograr es
+		 * 
+		 * 
+		 * UPDATE `furlong`.`registrodebam` SET `LOCACION`='COMPUTOS1', `SOLICITANTE`='SIN SOLIC1', `CHIPNRO`='1', `MARCACHIP`='1', `IMEI`='8698960106972591', `PROVEEDOR_PREDET`='CLARO1' WHERE `ID`='3';
+
+*/
+		
+		status=insertarOmodif(sentencia);
+		
+		return status;
+	}
+	
 	public  int insertarObjetoAlaBase(Persistente objeto,String base,String tabla){
 		int status=-1;
 		String atributos=formatearParaMySql(objeto.todosLosAtributos()).keySet().toString().replace('[', '(').replace("]", ")")+"values";
@@ -47,6 +69,7 @@ public class metodosSql extends ConexionMySql {
 		
 	}
 	
+	/*
     public int modificarObjetoDeLaBase(Persistente objeto,String base,String tabla){
     	int status=-1;
 		status=borrarObjetoDeLaBase(objeto, base, tabla);
@@ -60,8 +83,8 @@ public class metodosSql extends ConexionMySql {
 		
 		return status;
 		
-	}
-	
+	}metodo obsoleto no usar más
+	*/
 	
 	
 	
@@ -123,7 +146,7 @@ public class metodosSql extends ConexionMySql {
 			status=1;
 
 		} catch (SQLException e) {
-			System.out.println("Error en insertarOmodificar");
+			System.out.println("Error en insertarOmodificar"+e.getMessage());
 			if(e.getMessage().contains("Duplicate entry")){
 				System.out.println("Entrada duplicada cambie la clave primaria e intente de nuevo");
 				JOptionPane.showMessageDialog(null, "Entrada duplicada cambie la clave primaria e intente de nuevo");

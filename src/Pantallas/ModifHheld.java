@@ -227,7 +227,7 @@ public class ModifHheld extends JPanel {
 					
 					
 						metodosSql metodos=new metodosSql();					
-						
+						//metodo cargado a mano por una particularidad, el serial del chip...
 						String sentenciaSql="update handheld set modelo='"+modelo+"'" +
 																",serial='"+nroSerie+"'" +
 																",chapa_nro="+chapaNro+"" +
@@ -238,6 +238,8 @@ public class ModifHheld extends JPanel {
 						int status=metodos.insertarOmodif(sentenciaSql);
 						if(status==1){
 							JOptionPane.showMessageDialog(null,"Datos modificados con éxito!");
+						}else{
+							JOptionPane.showMessageDialog(null,"ERROR! COLOQUE CORRECTAMENTE LOS DATOS EN LOS CAMPOS, EN LA CHAPA VA SÓLO NÚMERO CHECK IT!" );
 						}
 					
 					
