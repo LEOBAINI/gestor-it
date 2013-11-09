@@ -88,6 +88,14 @@ public class Chip extends Persistente {
 		// TODO Auto-generated method stub
 		return todosLosAtributos;
 	}
+
+
+
+	@Override
+	public Object getPK() {
+		// TODO Auto-generated method stub
+		return getSerial();
+	}
 	
 
 }

@@ -114,4 +114,11 @@ public class Impresora extends Persistente {
 		this.todosLosAtributos = todosLosAtributos;
 	}
 
+
+	@Override
+	public Object getPK() {
+		// TODO Auto-generated method stub
+		return getId();
+	}
+
 }

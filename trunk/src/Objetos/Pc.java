@@ -161,4 +161,12 @@ public class Pc extends Persistente {
 		return this.todosLosAtributos;
 	}
 
+
+
+	@Override
+	public Object getPK() {
+		// TODO Auto-generated method stub
+		return getNombre();
+	}
+
 }

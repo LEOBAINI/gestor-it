@@ -63,6 +63,8 @@ public abstract class Persistente {
 	
 	public abstract String identificadorUnico();
 	
+	public abstract Object getPK();
+	
    
 
 }

@@ -227,13 +227,21 @@ public class HandHeld extends Persistente{
 	
 	public String identificadorUnico() {
 		
-		return this.serial;
+		return "serial";
 	}
 
 	
 	public HashMap<Object, Object> todosLosAtributos() {
 		
 		return todosLosAtributos;
+	}
+
+
+
+	@Override
+	public Object getPK() {
+		// TODO Auto-generated method stub
+		return getSerial();
 	}
 
 }

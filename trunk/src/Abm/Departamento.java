@@ -53,6 +53,13 @@ public class Departamento extends Persistente {
 		
 		return "idDepartamento";
 	}
+
+
+	@Override
+	public Object getPK() {
+		
+		return  getIdDepartamento();
+	}
 	
 	
 
