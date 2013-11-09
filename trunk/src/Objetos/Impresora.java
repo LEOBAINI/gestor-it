@@ -3,7 +3,7 @@ package Objetos;
 import java.util.HashMap;
 
 import Abm.Persistente;
-
+/***/
 public class Impresora extends Persistente {
 	String id;
 	String marca;
