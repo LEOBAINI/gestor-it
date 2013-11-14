@@ -1,5 +1,6 @@
 package Base;
 
+import java.awt.Choice;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +23,25 @@ public class metodosSql extends ConexionMySql {
 	
 	
 	public metodosSql() {
+	}
+	
+	public int llenarChoice(Choice desplegable,String consultaSQL) throws SQLException{
+		
+		ArrayList<String>lista;
+		lista=consultarUnaColumna(consultaSQL);
+		desplegable.removeAll();
+		for(int i=0;i<lista.size();i++)
+			desplegable.add(lista.get(i));
+		
+		return 0;
+		
+	}
+	public int reasignarHandHeld(String nroSerie,String locacion){
+		
+		String sentencia="UPDATE `furlong`.`handheld` SET `SECTOR_ASIGNADO`='"+locacion+"' WHERE `serial`='"+nroSerie+"';";
+		
+		return insertarOmodif(sentencia);
+		
 	}
 	
 	public  int updateObjetoDelaBase(Persistente objeto,String base,String tabla){

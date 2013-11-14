@@ -71,7 +71,6 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemNtbStock = null;
 	private JMenu jMenuHandheld = null;
 	private JMenuItem jMenuItemHandLocacion = null;
-	private JMenuItem jMenuItemHandStock = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -806,7 +805,6 @@ public class MenuPpal extends JFrame {
 			jMenuHandheld = new JMenu();
 			jMenuHandheld.setText("Hand held");
 			jMenuHandheld.add(getJMenuItemHandLocacion());
-			jMenuHandheld.add(getJMenuItemHandStock());
 		}
 		return jMenuHandheld;
 	}
@@ -820,21 +818,15 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemHandLocacion == null) {
 			jMenuItemHandLocacion = new JMenuItem();
 			jMenuItemHandLocacion.setText("A locación");
+			jMenuItemHandLocacion.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					ReasignacionHandHeld re=new ReasignacionHandHeld();
+					re.setVisible(true);
+					re.setLocationRelativeTo(null);
+				}
+			});
 		}
 		return jMenuItemHandLocacion;
-	}
-
-	/**
-	 * This method initializes jMenuItemHandStock	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getJMenuItemHandStock() {
-		if (jMenuItemHandStock == null) {
-			jMenuItemHandStock = new JMenuItem();
-			jMenuItemHandStock.setText("A stock");
-		}
-		return jMenuItemHandStock;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
