@@ -393,6 +393,7 @@ public class metodosSql extends ConexionMySql {
 	}
 	public int reAsignarChipAHand(String serieChip, String serieHand,String nuevoEstadoDelChip,String nuevoComentarioDelChip){
 		int status=0;
+		String HandQueLoTeniaAlChip=consultarUnaColumna("select serial from handheld where chip= '"+serieChip+"'").get(0);;
 		String serieChipViejo=consultarUnaColumna("select chip from handheld where serial= '"+serieHand+"'").get(0);
 		status=status+insertarOmodif("update chip set estado ='"+nuevoEstadoDelChip+"'," +
 				" comentario='"+nuevoComentarioDelChip+"' where serial= '"+serieChipViejo+"'");
