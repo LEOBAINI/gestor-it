@@ -49,6 +49,10 @@ public class ModifPcNtb extends JPanel {
 	private JLabel jLabelSeleccionarEquipo = null;
 	private Choice choiceEquiposAModif = null;
 	private int seleccionLleno=0;
+	private JLabel jLabelempresa = null;
+	private JTextField jTextFieldLocacion = null;
+	private JLabel jLabelEmpresa = null;
+	private JTextField jTextFieldEmpresa = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -63,6 +67,12 @@ public class ModifPcNtb extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
+		jLabelEmpresa = new JLabel();
+		jLabelEmpresa.setBounds(new Rectangle(211, 252, 142, 19));
+		jLabelEmpresa.setText("Empresa");
+		jLabelempresa = new JLabel();
+		jLabelempresa.setBounds(new Rectangle(210, 210, 143, 18));
+		jLabelempresa.setText("Locacion");
 		jLabelSeleccionarEquipo = new JLabel();
 		jLabelSeleccionarEquipo.setBounds(new Rectangle(410, 40, 182, 23));
 		jLabelSeleccionarEquipo.setText("Seleccionar equipo a modificar");
@@ -117,6 +127,10 @@ public class ModifPcNtb extends JPanel {
 		this.add(jLabelOffice, null);
 		this.add(jLabelSeleccionarEquipo, null);
 		this.add(getChoiceEquiposAModif(), null);
+		this.add(jLabelempresa, null);
+		this.add(getJTextFieldLocacion(), null);
+		this.add(jLabelEmpresa, null);
+		this.add(getJTextFieldEmpresa(), null);
 	}
 
 	/**
@@ -202,7 +216,7 @@ public class ModifPcNtb extends JPanel {
 	private JButton getJButtonModificar() {
 		if (jButtonModificar == null) {
 			jButtonModificar = new JButton();
-			jButtonModificar.setBounds(new Rectangle(375, 205, 232, 48));
+			jButtonModificar.setBounds(new Rectangle(376, 255, 232, 48));
 			jButtonModificar.setText("Modificar");
 			jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -221,7 +235,8 @@ public class ModifPcNtb extends JPanel {
 						if(jTextAreaComentario.getText().length()>0)
 						ntb.setComentario(jTextAreaComentario.getText().toUpperCase());
 						AdministradorABM abm=new AdministradorABM();
-						
+						ntb.setLocacion(jTextFieldLocacion.getText());
+						ntb.setEmpresa(jTextFieldEmpresa.getText());
 						int stat=abm.modificar(ntb, "furlong", "PC");
 						if(stat==1){
 							JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
@@ -242,6 +257,8 @@ public class ModifPcNtb extends JPanel {
 								pc.setComentario(jTextAreaComentario.getText().toUpperCase());
 							pc.setEsNotebook("NO");
 							AdministradorABM abm=new AdministradorABM();
+							pc.setLocacion(jTextFieldLocacion.getText());
+							pc.setEmpresa(jTextFieldEmpresa.getText());
 							int stat=abm.modificar(pc, "furlong", "PC");
 							if(stat==1){
 								JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
@@ -363,6 +380,8 @@ public class ModifPcNtb extends JPanel {
 					String comentario=fila.get(6);
 					jTextAreaComentario.setText(comentario);
 					String esNotebook=fila.get(7);
+					jTextFieldEmpresa.setText(fila.get(8));
+					jTextFieldLocacion.setText(fila.get(9));
 					
 					if(esNotebook.equals("SI")){
 					jCheckBoxEsNotebook.setSelected(true);
@@ -373,6 +392,32 @@ public class ModifPcNtb extends JPanel {
 			});
 		}
 		return choiceEquiposAModif;
+	}
+
+	/**
+	 * This method initializes jTextFieldLocacion	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldLocacion() {
+		if (jTextFieldLocacion == null) {
+			jTextFieldLocacion = new JTextField();
+			jTextFieldLocacion.setBounds(new Rectangle(210, 229, 144, 20));
+		}
+		return jTextFieldLocacion;
+	}
+
+	/**
+	 * This method initializes jTextFieldEmpresa	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldEmpresa() {
+		if (jTextFieldEmpresa == null) {
+			jTextFieldEmpresa = new JTextField();
+			jTextFieldEmpresa.setBounds(new Rectangle(210, 275, 144, 19));
+		}
+		return jTextFieldEmpresa;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="9,7"
