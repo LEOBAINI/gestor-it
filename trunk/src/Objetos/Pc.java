@@ -14,6 +14,8 @@ public class Pc extends Persistente {
 	String office;
 	String esNotebook="NO";
 	String comentario="SIN COMENTARIO";
+	String locacion;
+	String empresa;
 	
 	public String getOffice() {
 		return office;
@@ -167,6 +169,36 @@ public class Pc extends Persistente {
 	public Object getPK() {
 		// TODO Auto-generated method stub
 		return getNombre();
+	}
+
+
+
+	public String getLocacion() {
+		return locacion;
+	}
+
+
+
+	public void setLocacion(String locacion) {
+		this.locacion = locacion;
+		this.todosLosAtributos.remove("locacion");
+		this.todosLosAtributos.put("locacion",locacion);
+		this.locacion = locacion;
+	}
+
+
+
+	public String getEmpresa() {
+		return empresa;
+	}
+
+
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+		this.todosLosAtributos.remove("empresa");
+		this.todosLosAtributos.put("empresa",empresa);
+		
 	}
 
 }
