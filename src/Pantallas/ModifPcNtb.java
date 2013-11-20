@@ -72,7 +72,7 @@ public class ModifPcNtb extends JPanel {
 		jLabelEmpresa.setText("Empresa");
 		jLabelempresa = new JLabel();
 		jLabelempresa.setBounds(new Rectangle(210, 210, 143, 18));
-		jLabelempresa.setText("Locacion");
+		jLabelempresa.setText("Sector");
 		jLabelSeleccionarEquipo = new JLabel();
 		jLabelSeleccionarEquipo.setBounds(new Rectangle(410, 40, 182, 23));
 		jLabelSeleccionarEquipo.setText("Seleccionar equipo a modificar");

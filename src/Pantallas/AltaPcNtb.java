@@ -20,6 +20,8 @@ import Abm.AdministradorABM;
 import Objetos.Notebook;
 import Objetos.Pc;
 import java.awt.ScrollPane;
+import javax.swing.BorderFactory;
+import java.awt.Color;
 
 @SuppressWarnings("unused")
 public class AltaPcNtb extends JPanel {
@@ -44,6 +46,10 @@ public class AltaPcNtb extends JPanel {
 	private JLabel jLabelNombre = null;
 	private Choice choiceOffice = null;
 	private JLabel jLabelOffice = null;
+	private JLabel jLabelLocacion = null;
+	private JTextField jTextFieldLocacion = null;
+	private JLabel jLabelEmpresa = null;
+	private JTextField jTextFieldEmpresa = null;
 	/**
 	 * This is the default constructor
 	 */
@@ -58,6 +64,12 @@ public class AltaPcNtb extends JPanel {
 	 * @return void
 	 */
 	private void initialize() {
+		jLabelEmpresa = new JLabel();
+		jLabelEmpresa.setBounds(new Rectangle(209, 250, 145, 17));
+		jLabelEmpresa.setText("Empresa");
+		jLabelLocacion = new JLabel();
+		jLabelLocacion.setBounds(new Rectangle(209, 206, 145, 14));
+		jLabelLocacion.setText("Sector");
 		jLabelOffice = new JLabel();
 		jLabelOffice.setBounds(new Rectangle(24, 239, 114, 17));
 		jLabelOffice.setText("Paquete Office");
@@ -92,6 +104,7 @@ public class AltaPcNtb extends JPanel {
 		jLabelAltaPCNTB.setText("Alta de Pc y Notebook");
 		this.setSize(609, 306);
 		this.setLayout(null);
+		this.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.blue));
 		this.add(jLabelAltaPCNTB, null);
 		this.add(jLabelSO, null);
 		this.add(getJTextFieldUsuario(), null);
@@ -111,6 +124,10 @@ public class AltaPcNtb extends JPanel {
 		this.add(jLabelNombre, null);
 		this.add(getChoiceOffice(), null);
 		this.add(jLabelOffice, null);
+		this.add(jLabelLocacion, null);
+		this.add(getJTextFieldLocacion(), null);
+		this.add(jLabelEmpresa, null);
+		this.add(getJTextFieldEmpresa(), null);
 	}
 
 	/**
@@ -212,6 +229,8 @@ public class AltaPcNtb extends JPanel {
 				if(jTextAreaComentario.getText().length()>0)
 				ntb.setComentario(jTextAreaComentario.getText().toUpperCase());
 				AdministradorABM abm=new AdministradorABM();
+				ntb.setLocacion(jTextFieldLocacion.getText().toUpperCase());
+				ntb.setEmpresa(jTextFieldEmpresa.getText().toUpperCase());
 				int stat=abm.darDeAlta(ntb, "furlong", "PC");
 				if(stat==1){
 					JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
@@ -232,6 +251,8 @@ public class AltaPcNtb extends JPanel {
 						pc.setComentario(jTextAreaComentario.getText().toUpperCase());
 					pc.setEsNotebook("NO");
 					AdministradorABM abm=new AdministradorABM();
+					pc.setLocacion(jTextFieldLocacion.getText().toUpperCase());
+					pc.setEmpresa(jTextFieldEmpresa.getText().toUpperCase());
 					int stat=abm.darDeAlta(pc, "furlong", "PC");
 					if(stat==1){
 						JOptionPane.showMessageDialog(null,"Comando ejecutado correctamente");
@@ -261,7 +282,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextArea getJTextAreaComentario() {
 		if (jTextAreaComentario == null) {
 			jTextAreaComentario = new JTextArea();
-			jTextAreaComentario.setBounds(new Rectangle(211, 172, 144, 71));
+			jTextAreaComentario.setBounds(new Rectangle(209, 130, 145, 71));
 		}
 		return jTextAreaComentario;
 	}
@@ -295,6 +316,32 @@ public class AltaPcNtb extends JPanel {
 			choiceOffice.add("OTRO");
 		}
 		return choiceOffice;
+	}
+
+	/**
+	 * This method initializes jTextFieldLocacion	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldLocacion() {
+		if (jTextFieldLocacion == null) {
+			jTextFieldLocacion = new JTextField();
+			jTextFieldLocacion.setBounds(new Rectangle(209, 226, 145, 20));
+		}
+		return jTextFieldLocacion;
+	}
+
+	/**
+	 * This method initializes jTextFieldEmpresa	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextFieldEmpresa() {
+		if (jTextFieldEmpresa == null) {
+			jTextFieldEmpresa = new JTextField();
+			jTextFieldEmpresa.setBounds(new Rectangle(209, 268, 145, 18));
+		}
+		return jTextFieldEmpresa;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="7,6"
