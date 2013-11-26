@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Abm.Persistente;
+import Objetos.ModeloTabla;
 
 public class metodosSql extends ConexionMySql {
 	
@@ -329,7 +330,10 @@ public class metodosSql extends ConexionMySql {
 		if(fullConsulta.size()>0){
 		int columnas=fullConsulta.get(0).size();
 		int filas=fullConsulta.size();
-		DefaultTableModel modelo = new DefaultTableModel();
+		ModeloTabla modelo = new ModeloTabla();
+		
+		  
+
 		
 		modelo.setColumnCount(columnas);
 		modelo.setRowCount(filas);
@@ -351,6 +355,7 @@ public class metodosSql extends ConexionMySql {
 		
 		
 		tabla.setModel(modelo);
+		
 		
 		}
 	}
@@ -393,7 +398,9 @@ public class metodosSql extends ConexionMySql {
 	}
 	public int reAsignarChipAHand(String serieChip, String serieHand,String nuevoEstadoDelChip,String nuevoComentarioDelChip){
 		int status=0;
-		String HandQueLoTeniaAlChip=consultarUnaColumna("select serial from handheld where chip= '"+serieChip+"'").get(0);;
+		
+		JOptionPane.showMessageDialog(null, "En construccion");
+		/*String HandQueLoTeniaAlChip=consultarUnaColumna("select serial from handheld where chip= '"+serieChip+"'").get(0);;
 		String serieChipViejo=consultarUnaColumna("select chip from handheld where serial= '"+serieHand+"'").get(0);
 		status=status+insertarOmodif("update chip set estado ='"+nuevoEstadoDelChip+"'," +
 				" comentario='"+nuevoComentarioDelChip+"' where serial= '"+serieChipViejo+"'");
@@ -402,7 +409,7 @@ public class metodosSql extends ConexionMySql {
 			status=1;
 		}else{
 			status=-1;
-		}
+		}*/
 		return status;
 	}
 
