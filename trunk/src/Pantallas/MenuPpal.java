@@ -397,7 +397,9 @@ public class MenuPpal extends JFrame {
 		}
 		return jMenuItemBajas2;
 	}
-
+public static void actualizarPantalla(){
+	
+}
 	/**
 	 * This method initializes jMenuItemPcModif	
 	 * 	

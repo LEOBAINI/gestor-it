@@ -7,6 +7,7 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import Abm.AdministradorABM;
 import Base.ConexionMySql;
@@ -25,6 +26,13 @@ public class Main {
 	
 
 	public static void main(String[] args) throws InterruptedException {
+		try 
+	    { 
+	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"); 
+	    } 
+	    catch(Exception e){ 
+	    }
+	    
 		
 		MenuPpal menu=new MenuPpal();
 		
@@ -38,7 +46,7 @@ public class Main {
 		ConexionMySql con=new ConexionMySql();
 		if(con.conectar()==1){
 			menu.setTitle("Software de Gestión construido por y para profesionales IT                                       PRUEBA DE CONEXIÓN OK, CONECTADO A "+con.getHost()+" BASE DE DATOS "+con.getBase());
-			JOptionPane.showMessageDialog(null,"Prueba de conexión satisfactoria!" );
+			//JOptionPane.showMessageDialog(null,"Prueba de conexión satisfactoria!" );
 		}else{
 			menu.setTitle("Software de Gestión construido por y para profesionales IT                                       PRUEBA DE CONEXIÓN FALLIDA, REINTENTE");
 			JOptionPane.showMessageDialog(null,"Asegurese que responda el ping a "+con.getHost()+" y que la base se llame, furlong.\n" +
