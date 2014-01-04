@@ -26,12 +26,12 @@ public class Main {
 	
 
 	public static void main(String[] args) throws InterruptedException {
-		try 
+		/*try
 	    { 
 	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"); 
 	    } 
 	    catch(Exception e){ 
-	    }
+	    }*/
 	    
 		
 		MenuPpal menu=new MenuPpal();

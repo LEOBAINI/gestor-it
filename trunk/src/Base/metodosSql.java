@@ -14,8 +14,6 @@ import java.util.Locale;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import Abm.Persistente;
 import Objetos.ModeloTabla;
 
@@ -38,10 +36,16 @@ public class metodosSql extends ConexionMySql {
 		
 	}
 	public int reasignarHandHeld(String nroSerie,String locacion){
-		
+		int status=0;
 		String sentencia="UPDATE `furlong`.`handheld` SET `SECTOR_ASIGNADO`='"+locacion+"' WHERE `serial`='"+nroSerie+"';";
 		
-		return insertarOmodif(sentencia);
+		try {
+			return insertarOmodif(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return status;
+		}
 		
 	}
 	
@@ -62,7 +66,12 @@ public class metodosSql extends ConexionMySql {
 
 */
 		
-		status=insertarOmodif(sentencia);
+		try {
+			status=insertarOmodif(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return status;
 	}
@@ -75,7 +84,12 @@ public class metodosSql extends ConexionMySql {
 		
 		String sentencia="insert into `"+base+"`.`"+tabla+"`"+atributos+valores;		
 		
-		status=insertarOmodif(sentencia);
+		try {
+			status=insertarOmodif(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return status;
 	}
@@ -84,7 +98,12 @@ public class metodosSql extends ConexionMySql {
 		int status=0;
 		String sentencia="delete from `"+base+"`.`"+tabla+"` where `"+objeto.identificadorUnico()+"`='"+objeto.todosLosAtributos().get(objeto.identificadorUnico())+"';";
 		
-		status=insertarOmodif(sentencia);
+		try {
+			status=insertarOmodif(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return status;
 		
@@ -154,7 +173,7 @@ public class metodosSql extends ConexionMySql {
 	return fecha;
 	}
 
-	public int insertarOmodif(String sentenciaSql) {
+	public int insertarOmodif(String sentenciaSql) throws SQLException {
 		int status=0;
 		ConexionMySql con = new ConexionMySql();
 		System.out.println(sentenciaSql);
@@ -171,7 +190,7 @@ public class metodosSql extends ConexionMySql {
 			if(e.getMessage().contains("Duplicate entry")){
 				System.out.println("Entrada duplicada cambie la clave primaria e intente de nuevo");
 				JOptionPane.showMessageDialog(null, "Entrada duplicada cambie la clave primaria e intente de nuevo");
-			
+			con.rollBack();
 			}
 			//e.printStackTrace();
 			
@@ -357,6 +376,15 @@ public class metodosSql extends ConexionMySql {
 		tabla.setModel(modelo);
 		
 		
+		}else{
+			ModeloTabla modelo = new ModeloTabla();
+			
+			  
+
+			
+			modelo.setColumnCount(0);
+			modelo.setRowCount(0);
+			tabla.setModel(modelo);
 		}
 	}
 	public String estadoDeChip(String serie){
@@ -381,12 +409,27 @@ public class metodosSql extends ConexionMySql {
 		int status=0;
 		String marcaChip=consultarUnaColumna("select marca from chip where serial= '"+serieChip+"'" ).get(0);
 		//colocar chip en columna chipnro en hand
-		status=status+insertarOmodif("update handheld set chip = '"+serieChip+"' " +
-				"where serial= '"+serieHand+"'");
+		try {
+			status=status+insertarOmodif("update handheld set chip = '"+serieChip+"' " +
+					"where serial= '"+serieHand+"'");
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//colocar marca del chip en la columna de hand
-		status=status+insertarOmodif("update handheld set chipmarca = '"+marcaChip+"' where serial= '"+serieHand+"'");
+		try {
+			status=status+insertarOmodif("update handheld set chipmarca = '"+marcaChip+"' where serial= '"+serieHand+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//cambiar el estado del chip en chip a operativo mayus.
-		status=status+insertarOmodif("update chip set estado ='OPERATIVO' where serial= '"+serieChip+"'");
+		try {
+			status=status+insertarOmodif("update chip set estado ='OPERATIVO' where serial= '"+serieChip+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(status==3){
 			status=1;
 		}else{

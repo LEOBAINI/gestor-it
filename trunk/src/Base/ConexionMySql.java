@@ -11,7 +11,7 @@ public class ConexionMySql {
         protected  Statement statemente;
         protected  ResultSet resulsete;
         private  String base="furlong";
-        public static  String host="localhost";
+        public static  String host="192.1.1.8";
         private  String cadena="jdbc:mysql://"+host+"/"+base;
        // private static String cadena="jdbc:mysql://localhost/pruebas";
         private  String driver="com.mysql.jdbc.Driver";
@@ -65,6 +65,8 @@ public class ConexionMySql {
             }
             catch(SQLException e2){
                 System.out.println("Error en la conexion");
+                
+                System.out.println(e2.getLocalizedMessage());
                 status=0;
                 
 
@@ -72,6 +74,9 @@ public class ConexionMySql {
             return status;
 
     }
+        public void rollBack() throws SQLException{
+        	c.rollback();
+        }
        
         public  void desconectar(){
         	//estado=new JTextField();

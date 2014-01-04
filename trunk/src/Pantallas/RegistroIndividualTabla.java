@@ -78,7 +78,7 @@ public class RegistroIndividualTabla extends JFrame {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setBounds(new Rectangle(639, 75, 143, 27));
+			jButton.setBounds(new Rectangle(639, 72, 118, 26));
 			jButton.setText("Guardar");
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
