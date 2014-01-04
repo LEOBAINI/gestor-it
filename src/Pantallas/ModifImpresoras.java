@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Choice;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
@@ -328,7 +329,13 @@ public class ModifImpresoras extends JPanel {
 					if(sentencia!=null){
 					metodosSql metodos=new metodosSql();
 					
-					int status=metodos.insertarOmodif(sentencia);
+					int status = 0;
+					try {
+						status = metodos.insertarOmodif(sentencia);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if(status==1){
 						JOptionPane.showMessageDialog(null,"Comando ejecutado ok");
 					}else{

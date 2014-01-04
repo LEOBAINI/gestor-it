@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Timer;
 
 import javax.swing.JProgressBar;
@@ -22,6 +23,7 @@ import javax.swing.JButton;
 public class MenuPpal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
@@ -34,7 +36,6 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemModif = null;
 	private JMenu jMenuRepas = null;
 	private JMenuItem jMenuItemEnviar = null;
-	private JMenuItem jMenuItemRetirar = null;
 	private JMenu jMenuInventario = null;
 	private JMenuItem jMenuItemPc = null;
 	private JMenuItem jMenuItemImpresoras = null;
@@ -71,12 +72,22 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemNtbStock = null;
 	private JMenu jMenuHandheld = null;
 	private JMenuItem jMenuItemHandLocacion = null;
+	private JMenu jMenuInicio = null;
+	private JMenuItem jMenuItemRepaVigente = null;
 	/**
 	 * This is the default constructor
 	 */
 	public MenuPpal() {
 		super();
 		initialize();
+	}
+	public  void alInicio(){
+	      
+		Inicio ini=new Inicio();
+		
+	   this.jContentPane.add(ini);
+		jContentPane.updateUI();
+		
 	}
 
 	/**
@@ -126,6 +137,7 @@ public class MenuPpal extends JFrame {
 			jJMenuBar.add(getJMenuInventario());
 			jJMenuBar.add(getJMenuReasignaciones());
 			jJMenuBar.add(getJMenuConsultas());
+			jJMenuBar.add(getJMenuInicio());
 		}
 		return jJMenuBar;
 	}
@@ -140,7 +152,7 @@ public class MenuPpal extends JFrame {
 			jMenuRepas = new JMenu();
 			jMenuRepas.setText("Reparaciones");
 			jMenuRepas.add(getJMenuItemEnviar());
-			jMenuRepas.add(getJMenuItemRetirar());
+			jMenuRepas.add(getJMenuItemRepaVigente());
 		}
 		return jMenuRepas;
 	}
@@ -154,21 +166,22 @@ public class MenuPpal extends JFrame {
 		if (jMenuItemEnviar == null) {
 			jMenuItemEnviar = new JMenuItem();
 			jMenuItemEnviar.setText("Enviar a Reparar");
+			jMenuItemEnviar.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					Areparar repa = null;
+					try {
+						repa = new Areparar();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					jContentPane.removeAll();
+					getContentPane().add(repa);
+					jContentPane.updateUI(); // 
+				}
+			});
 		}
 		return jMenuItemEnviar;
-	}
-
-	/**
-	 * This method initializes jMenuItemRetirar	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getJMenuItemRetirar() {
-		if (jMenuItemRetirar == null) {
-			jMenuItemRetirar = new JMenuItem();
-			jMenuItemRetirar.setText("Retirar de reparación");
-		}
-		return jMenuItemRetirar;
 	}
 
 	/**
@@ -829,6 +842,44 @@ public static void actualizarPantalla(){
 			});
 		}
 		return jMenuItemHandLocacion;
+	}
+	/**
+	 * This method initializes jMenuInicio	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenuInicio() {
+		if (jMenuInicio == null) {
+			jMenuInicio = new JMenu();
+			jMenuInicio.setText("Al principio");
+			jMenuInicio.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					alInicio();
+				}
+			});
+		}
+		return jMenuInicio;
+	}
+	/**
+	 * This method initializes jMenuItemRepaVigente	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItemRepaVigente() {
+		if (jMenuItemRepaVigente == null) {
+			jMenuItemRepaVigente = new JMenuItem();
+			jMenuItemRepaVigente.setText("Reparaciones, operaciones varias");
+			jMenuItemRepaVigente.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					VerReparacionesVigentes ver=new VerReparacionesVigentes();
+					getContentPane().removeAll();
+					getContentPane().add(ver);
+					jContentPane.updateUI();
+				
+				}
+			});
+		}
+		return jMenuItemRepaVigente;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"

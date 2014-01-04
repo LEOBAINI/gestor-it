@@ -17,6 +17,7 @@ import Base.metodosSql;
 import Objetos.HandHeld;
 
 import java.awt.Choice;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JTextPane;
 
@@ -214,7 +215,12 @@ public class AltaHanHeld extends JPanel {
 					if(status==1){
 						metodosSql metodos=new metodosSql();
 						String sentenciaSql="update chip set estado='OPERATIVO' where serial= '"+hand.getChip()+"'";
-						metodos.insertarOmodif(sentenciaSql);
+						try {
+							metodos.insertarOmodif(sentenciaSql);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						JOptionPane.showMessageDialog(null, "Hand Held creada con éxito!");
 					}else{
 						JOptionPane.showMessageDialog(null,"Algo salió mal, no se guardaron los datos...Reintente.");

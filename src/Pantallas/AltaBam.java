@@ -20,6 +20,7 @@ import Objetos.Bam;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import java.awt.Choice;
+import java.sql.SQLException;
 
 @SuppressWarnings("unused")
 public class AltaBam extends JPanel {
@@ -160,12 +161,22 @@ public class AltaBam extends JPanel {
 						
 						
 						
-						status=status+metodos.insertarOmodif(sentenciaSql);
+						try {
+							status=status+metodos.insertarOmodif(sentenciaSql);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						if(status==2){
 							JOptionPane.showMessageDialog(null, "Éxito al cargar los datos");
 							
 						}else{
-							metodos.insertarOmodif("delete FROM furlong.bam where imei='"+b.getImei()+"'; delete FROM furlong.registrodebam where imei='"+b.getImei()+"';");
+							try {
+								metodos.insertarOmodif("delete FROM furlong.bam where imei='"+b.getImei()+"'; delete FROM furlong.registrodebam where imei='"+b.getImei()+"';");
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							JOptionPane.showMessageDialog(null,"Los datos no se cargaron porque no se pudo ejecutar --> "+sentenciaSql);
 						}
 						
