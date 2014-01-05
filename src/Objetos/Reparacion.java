@@ -7,7 +7,7 @@ import Abm.Persistente;
 public class Reparacion extends Persistente {
 	//int IDREPA;//	(11)	NO	PRI		auto_increment
 	String lugar;//	varchar(45)	YES			
-	String fecha;//	date	YES			
+	String fecha_enviado;//	date	YES			
 	String serial_del_equipo;//	varchar(45)	YES	MUL		
 	String tipo;//	varchar(45)	YES			
 	String modelo;//	varchar(45)	YES			
@@ -64,15 +64,15 @@ public class Reparacion extends Persistente {
 		this.lugar = lugar;
 	}
 
-	public String getFecha() {
-		return fecha;
+	public String getFecha_enviado() {
+		return fecha_enviado;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-		this.todosLosAtributos.remove("fecha");
-		this.todosLosAtributos.put("fecha",fecha);
-		this.fecha = fecha;
+	public void setFecha_enviado(String fecha_enviado) {
+		this.fecha_enviado = fecha_enviado;
+		this.todosLosAtributos.remove("fecha_enviado");
+		this.todosLosAtributos.put("fecha_enviado",fecha_enviado);
+		this.fecha_enviado = fecha_enviado;
 	}
 
 	public String getSerial_del_equipo() {

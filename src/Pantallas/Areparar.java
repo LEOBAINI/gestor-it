@@ -322,7 +322,7 @@ public class Areparar extends JPanel {
 					Reparacion repa=new Reparacion();
 					repa.setDescripcion(textAreaDescripcion.getText());
 					repa.setEstado(choiceEstado.getSelectedItem());
-					repa.setFecha(jTextFieldFecha.getText());
+					repa.setFecha_enviado(jTextFieldFecha.getText());
 					repa.setLugar(choiceLugar.getSelectedItem());
 					repa.setMail_de_contacto(jTextFieldMail.getText());
 					repa.setModelo(jTextFieldModelo.getText());
