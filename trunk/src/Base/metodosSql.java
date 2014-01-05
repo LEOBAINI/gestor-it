@@ -88,7 +88,7 @@ public class metodosSql extends ConexionMySql {
 			status=insertarOmodif(sentencia);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
 		}
 		
 		return status;
@@ -192,12 +192,17 @@ public class metodosSql extends ConexionMySql {
 				JOptionPane.showMessageDialog(null, "Entrada duplicada cambie la clave primaria e intente de nuevo");
 			con.rollBack();
 			}
+		  
 			//e.printStackTrace();
 			
 			
 			con.desconectar();
 			status=-1;
 		}
+		
+		catch(Exception e){
+			  JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+		  }
 		return status;
 
 	}
