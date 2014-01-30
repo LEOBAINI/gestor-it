@@ -11,7 +11,7 @@ public class ConexionMySql {
         protected  Statement statemente;
         protected  ResultSet resulsete;
         private  String base="furlong";
-        public static  String host="192.1.1.8";
+        public static  String host="localhost";//192.1.1.8";
         private  String cadena="jdbc:mysql://"+host+"/"+base;
        // private static String cadena="jdbc:mysql://localhost/pruebas";
         private  String driver="com.mysql.jdbc.Driver";
@@ -55,6 +55,7 @@ public class ConexionMySql {
                 Class.forName(driver);
                 c=DriverManager.getConnection(cadena,"gestorit","zayb9183");
                  statemente=c.createStatement();
+                 c.setAutoCommit(false);
                //  System.out.println("Conectado OK");
                status=1;
 
@@ -74,6 +75,15 @@ public class ConexionMySql {
             return status;
 
     }
+        
+        public void commit(){
+        	try {
+				c.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
         public void rollBack() throws SQLException{
         	c.rollback();
         }

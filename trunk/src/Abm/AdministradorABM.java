@@ -1,5 +1,8 @@
 package Abm;
 
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import Base.metodosSql;
 
 public class AdministradorABM {
@@ -8,6 +11,9 @@ public class AdministradorABM {
 	}
 	
 	public int darDeAlta(Persistente objeto,String base,String tabla) {
+		
+		
+		
 		metodosSql metodos=new metodosSql();
 		
 		

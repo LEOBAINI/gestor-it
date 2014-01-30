@@ -138,11 +138,14 @@ public class metodosSql extends ConexionMySql {
 			clave=e.getKey();
 			valor=e.getValue();
 			clave="`"+clave+"`";
+			if(valor!=null){
 			if(valor.getClass().getSimpleName().equals("String"))
 				
 				valor="'"+valor+"'";
 			aux.put(clave, valor);
-			}		
+			}	
+			
+		}
 		
 		return aux;
 		
@@ -181,6 +184,8 @@ public class metodosSql extends ConexionMySql {
 		try {
 			con.conectar();
 			con.statemente.executeUpdate(sentenciaSql);
+			con.commit();
+			
 
 			con.desconectar();
 			status=1;
