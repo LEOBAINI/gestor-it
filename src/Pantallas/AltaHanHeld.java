@@ -45,7 +45,7 @@ public class AltaHanHeld extends JPanel {
 	private JTextField jTextFieldGarantiaHasta = null;
 	private JLabel jLabelFormatoFecha = null;
 	private JLabel jLabelMarcaChip = null;
-	private String numeroChip="Sin chip";
+	private String numeroChip="Sin chip";  //  @jve:decl-index=0:
 	private Choice choiceMarca = null;
 	private Choice choiceModelo = null;
 	/**
@@ -185,6 +185,7 @@ public class AltaHanHeld extends JPanel {
 						String chapaNro=null;
 						try{
 							chapaNro=getJTextFieldChapa().getText();
+							
 						}catch(Exception ex){
 							JOptionPane.showMessageDialog(null,"Valor inválido,se colocará 0 por default" );
 						}

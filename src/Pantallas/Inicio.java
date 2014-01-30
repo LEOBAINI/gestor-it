@@ -30,11 +30,11 @@ public class Inicio extends JPanel {
 	 */
 	private void initialize() {
 		jLabelGestorIT = new JLabel();
-		jLabelGestorIT.setBounds(new Rectangle(183, 64, 302, 156));
+		jLabelGestorIT.setBounds(new Rectangle(476, 219, 317, 229));
 		jLabelGestorIT.setFont(new Font("Dialog", Font.BOLD, 12));
 		jLabelGestorIT.setIcon(new ImageIcon(getClass().getResource("/Imagenes/Logo.jpg")));
 		jLabelGestorIT.setText("");
-		this.setSize(721, 313);
+		this.setSize(1404, 680);
 		this.setLayout(null);
 		this.setBackground(new Color(204, 204, 255));
 		this.add(jLabelGestorIT, null);

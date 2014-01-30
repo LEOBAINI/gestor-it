@@ -1,6 +1,8 @@
 package Pantallas;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.Dimension;
@@ -72,7 +74,6 @@ public class MenuPpal extends JFrame {
 	private JMenuItem jMenuItemNtbStock = null;
 	private JMenu jMenuHandheld = null;
 	private JMenuItem jMenuItemHandLocacion = null;
-	private JMenu jMenuInicio = null;
 	private JMenuItem jMenuItemRepaVigente = null;
 	/**
 	 * This is the default constructor
@@ -96,7 +97,9 @@ public class MenuPpal extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(722, 366);
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		//this.setAlwaysOnTop(true);
+		//this.setSize(722, 366);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
@@ -137,7 +140,6 @@ public class MenuPpal extends JFrame {
 			jJMenuBar.add(getJMenuInventario());
 			jJMenuBar.add(getJMenuReasignaciones());
 			jJMenuBar.add(getJMenuConsultas());
-			jJMenuBar.add(getJMenuInicio());
 		}
 		return jJMenuBar;
 	}
@@ -842,23 +844,6 @@ public static void actualizarPantalla(){
 			});
 		}
 		return jMenuItemHandLocacion;
-	}
-	/**
-	 * This method initializes jMenuInicio	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	private JMenu getJMenuInicio() {
-		if (jMenuInicio == null) {
-			jMenuInicio = new JMenu();
-			jMenuInicio.setText("Al principio");
-			jMenuInicio.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					alInicio();
-				}
-			});
-		}
-		return jMenuInicio;
 	}
 	/**
 	 * This method initializes jMenuItemRepaVigente	
