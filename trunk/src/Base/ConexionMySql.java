@@ -11,7 +11,11 @@ public class ConexionMySql {
         protected  Statement statemente;
         protected  ResultSet resulsete;
         private  String base="furlong";
+<<<<<<< .mine
+        public static  String host="192.1.1.8";
+=======
         public static  String host="localhost";//192.1.1.8";
+>>>>>>> .r51
         private  String cadena="jdbc:mysql://"+host+"/"+base;
        // private static String cadena="jdbc:mysql://localhost/pruebas";
         private  String driver="com.mysql.jdbc.Driver";
