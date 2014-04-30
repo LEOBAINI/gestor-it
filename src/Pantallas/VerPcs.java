@@ -213,7 +213,7 @@ public class VerPcs extends JPanel {
 	private JTextField getJTextFieldFilas() {
 		if (jTextFieldFilas == null) {
 			jTextFieldFilas = new JTextField();
-			jTextFieldFilas.setBounds(new Rectangle(630, 8, 98, 17));
+			jTextFieldFilas.setBounds(new Rectangle(630, 1, 98, 31));
 			jTextFieldFilas.setEditable(false);
 		}
 		return jTextFieldFilas;
