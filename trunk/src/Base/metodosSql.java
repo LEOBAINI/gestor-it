@@ -347,7 +347,7 @@ public class metodosSql extends ConexionMySql {
 		return mes;
 	}
 	
-	public void llenarJtable(JTable tabla,String consulta){
+	/*public void llenarJtable(JTable tabla,String consulta){
 		tabla.removeAll();
 		ArrayList<ArrayList<String>> fullConsulta=new ArrayList<ArrayList<String>>();
 		metodosSql metodos=new metodosSql();
@@ -396,7 +396,56 @@ public class metodosSql extends ConexionMySql {
 			modelo.setRowCount(0);
 			tabla.setModel(modelo);
 		}
-	}
+	}*/
+	  public void llenarJtable(JTable tabla,String consulta){
+          tabla.removeAll();
+          ArrayList<ArrayList<String>> fullConsulta=new ArrayList<ArrayList<String>>();
+          metodosSql metodos=new metodosSql();
+                  
+                  
+          
+          fullConsulta=metodos.consultar(consulta);
+          //ResultSet res=metodos.consultarResultSet(consulta);
+          if(fullConsulta.size()>0){
+          int columnas=fullConsulta.get(0).size();
+          int filas=fullConsulta.size();
+          ModeloTabla modelo = new ModeloTabla();
+          
+            
+
+          
+          modelo.setColumnCount(columnas);
+          modelo.setRowCount(filas);
+          
+          
+          
+          
+          for(int i=0;i<filas;i++){
+          
+          for(int j=0;j<columnas;j++){
+          
+          
+          
+           modelo.setValueAt(fullConsulta.get(i).get(j), i, j);
+          }
+          }
+          modelo.setColumnIdentifiers(metodos.consultarNombresColumnas(consulta));
+          
+          tabla.setModel(modelo);
+          tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+          ColumnResizer.adjustColumnPreferredWidths(tabla);
+          
+          
+          
+          }else{
+                  ModeloTabla modelo = new ModeloTabla();                   
+
+                  
+                  modelo.setColumnCount(0);
+                  modelo.setRowCount(0);
+                  tabla.setModel(modelo);
+          }
+  }
 	public String estadoDeChip(String serie){
 		
 		

@@ -138,7 +138,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getJTextFieldUsuario() {
 		if (jTextFieldUsuario == null) {
 			jTextFieldUsuario = new JTextField();
-			jTextFieldUsuario.setBounds(new Rectangle(24, 99, 114, 17));
+			jTextFieldUsuario.setBounds(new Rectangle(24, 90, 114, 28));
 		}
 		return jTextFieldUsuario;
 	}
@@ -151,7 +151,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getUserLogin() {
 		if (UserLogin == null) {
 			UserLogin = new JTextField();
-			UserLogin.setBounds(new Rectangle(24, 155, 114, 17));
+			UserLogin.setBounds(new Rectangle(24, 155, 114, 28));
 		}
 		return UserLogin;
 	}
@@ -295,7 +295,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getJTextFieldNombre() {
 		if (jTextFieldNombre == null) {
 			jTextFieldNombre = new JTextField();
-			jTextFieldNombre.setBounds(new Rectangle(24, 211, 114, 17));
+			jTextFieldNombre.setBounds(new Rectangle(24, 211, 114, 28));
 		}
 		return jTextFieldNombre;
 	}
@@ -326,7 +326,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getJTextFieldLocacion() {
 		if (jTextFieldLocacion == null) {
 			jTextFieldLocacion = new JTextField();
-			jTextFieldLocacion.setBounds(new Rectangle(209, 226, 145, 20));
+			jTextFieldLocacion.setBounds(new Rectangle(209, 226, 145, 28));
 		}
 		return jTextFieldLocacion;
 	}
@@ -339,7 +339,7 @@ public class AltaPcNtb extends JPanel {
 	private JTextField getJTextFieldEmpresa() {
 		if (jTextFieldEmpresa == null) {
 			jTextFieldEmpresa = new JTextField();
-			jTextFieldEmpresa.setBounds(new Rectangle(209, 268, 145, 18));
+			jTextFieldEmpresa.setBounds(new Rectangle(209, 268, 145, 28));
 		}
 		return jTextFieldEmpresa;
 	}

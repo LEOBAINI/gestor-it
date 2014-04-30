@@ -302,7 +302,7 @@ public class ModifPcNtb extends JPanel {
 		if (jTextFieldNombre == null) {
 			jTextFieldNombre = new JTextField();
 			jTextFieldNombre.setBounds(new Rectangle(25, 213, 109, 18));
-			jTextFieldNombre.setEditable(false);
+			jTextFieldNombre.setEditable(true);
 		}
 		return jTextFieldNombre;
 	}

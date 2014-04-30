@@ -203,12 +203,13 @@ public class AltaHanHeld extends JPanel {
 						
 						
 						
+						
 						HandHeld hand=new HandHeld(chapaNro, nroSerie,chipMarca ,modelo, comentario, esDual, garantia);
 						if(!chipNro.equals("Sin chip")){
 							hand.setChip(chipNro);
 							
 						}else{
-							hand.setChip("SIN CHIP");
+							hand.getTodosLosAtributos().remove("chip");//setChip("SIN CHIP");
 						}
 					AdministradorABM abm=new AdministradorABM();
 					int status=0;
