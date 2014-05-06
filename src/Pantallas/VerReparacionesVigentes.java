@@ -198,6 +198,8 @@ public class VerReparacionesVigentes extends JPanel {
 					}
 					if(status==1){
 						JOptionPane.showMessageDialog(null,"Recibido, puede chequear en historial");
+						
+						metodos.actualizarEstadoRepararOk();
 					}else{
 						JOptionPane.showMessageDialog(null,"Error, sigue en reparación");
 					}

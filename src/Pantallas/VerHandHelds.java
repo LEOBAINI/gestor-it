@@ -213,7 +213,7 @@ public class VerHandHelds extends JPanel {
 					String query="CHAPA_NRO,SERIAL,CHIP,CHIPMARCA," +
 					" MODELO,ESTADO,SECTOR_ASIGNADO,COMENTARIO,LUGAR_FISICO_REAL,ESDUAL,GARANTIA_EXTENDIDA_HASTA AS 'GTIA HASTA'";
 					metodos.llenarJtable(jTableHandHelds, "select "+query+" from handheld" +
-							" WHERE SECTOR_ASIGNADO='SIN ASIGNAR' "+ordenTabla);
+							" WHERE SECTOR_ASIGNADO='COMPUTOS' "+ordenTabla);
 					jTextFieldFilas.setText(String.valueOf(jTableHandHelds.getRowCount()));
 				}
 			});

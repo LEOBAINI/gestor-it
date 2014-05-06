@@ -334,6 +334,8 @@ public class Areparar extends JPanel {
 					status=abm.darDeAlta(repa, "furlong", "reparacion");
 					if(status==1){
 						JOptionPane.showMessageDialog(null, "Operación exitosa!");
+						metodosSql metodos=new metodosSql();
+						metodos.actualizarEstadoRepararEnReparacion();
 					}
 					else{
 						JOptionPane.showMessageDialog(null, "Operación fallida.");

@@ -515,7 +515,21 @@ public class metodosSql extends ConexionMySql {
 		return status;
 	}
 
+	public void actualizarEstadoRepararEnReparacion(){
+		try {
+			insertarOmodif("UPDATE HANDHELD SET ESTADO='EN REPARACION' WHERE SERIAL IN (SELECT SERIAL_DEL_EQUIPO FROM REPARACION);");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Error al actualizar estado");
+		}
+	}
 	
+	public void actualizarEstadoRepararOk(){
+		try {
+			insertarOmodif("UPDATE HANDHELD SET ESTADO='OK' WHERE SERIAL NOT IN (SELECT SERIAL_DEL_EQUIPO FROM REPARACION);");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Error al actualizar estado");
+		}
+	}
 	
 
 }
