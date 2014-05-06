@@ -157,7 +157,7 @@ public class VerPcs extends JPanel {
 					MessageFormat headerFormat = new MessageFormat(titulo+" al "+metodos.dameFechaDeHoy());
 		                     MessageFormat footerFormat = new MessageFormat("- Página {0} -");
 		                     try {
-								jTableVerPcs.print(PrintMode.FIT_WIDTH, headerFormat, footerFormat);
+								jTableVerPcs.print(PrintMode.NORMAL, headerFormat, footerFormat);//FIT_WIDTH
 							} catch (PrinterException e1) {
 								// TODO Auto-generated catch block
 								JOptionPane.showMessageDialog(null, "Hubo un error intente de nuevo");

@@ -5,7 +5,9 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import java.awt.Rectangle;
+import java.awt.print.PrinterException;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 
 import javax.swing.JTable;
 
@@ -13,6 +15,7 @@ import Base.metodosSql;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable.PrintMode;
 
 @SuppressWarnings("unused")
 public class VerReparacionesVigentes extends JPanel {
@@ -25,6 +28,7 @@ public class VerReparacionesVigentes extends JPanel {
 	private JLabel jLabelQueVeo = null;
 	private JButton jButtonVerActuales = null;
 	private JButton jButtonRetirar = null;
+	private JButton jButtonImprimir = null;
 
 	/**
 	 * This is the default constructor
@@ -51,6 +55,7 @@ public class VerReparacionesVigentes extends JPanel {
 		this.add(jLabelQueVeo, null);
 		this.add(getJButtonVerActuales(), null);
 		this.add(getJButtonRetirar(), null);
+		this.add(getJButtonImprimir(), null);
 	}
 
 	/**
@@ -202,6 +207,37 @@ public class VerReparacionesVigentes extends JPanel {
 			});
 		}
 		return jButtonRetirar;
+	}
+
+	/**
+	 * This method initializes jButtonImprimir	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButtonImprimir() {
+		if (jButtonImprimir == null) {
+			jButtonImprimir = new JButton();
+			jButtonImprimir.setBounds(new Rectangle(428, 333, 182, 24));
+			jButtonImprimir.setText("IMPRIMIR");
+			jButtonImprimir.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					metodosSql metodos=new metodosSql();
+					String titulo;
+					titulo=JOptionPane.showInputDialog("Ingrese título del informe");
+					if(titulo!=null){
+					MessageFormat headerFormat = new MessageFormat(titulo+" al "+metodos.dameFechaDeHoy());
+		                     MessageFormat footerFormat = new MessageFormat("- Página {0} -");
+		                     try {
+								jTableRepas.print(PrintMode.FIT_WIDTH, headerFormat, footerFormat);//FIT_WIDTH
+							} catch (PrinterException e1) {
+								// TODO Auto-generated catch block
+								JOptionPane.showMessageDialog(null, "Hubo un error intente de nuevo");
+								e1.printStackTrace();
+							}	
+				}}
+			});
+		}
+		return jButtonImprimir;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
