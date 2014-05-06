@@ -40,6 +40,7 @@ public class Main {
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		menu.setVisible(true);
+		
 		/*String host=JOptionPane.showInputDialog("Ingrese la ip del host o nombre del mismo");
 		if(host!=null){
 			ConexionMySql.host=host;
