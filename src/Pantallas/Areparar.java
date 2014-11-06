@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 
 import Abm.AdministradorABM;
 import Base.metodosSql;
+import Objetos.HandHeld;
 import Objetos.Reparacion;
 
 import java.awt.Color;
@@ -331,7 +332,10 @@ public class Areparar extends JPanel {
 					repa.setTipo(choiceEquipos.getSelectedItem());		
 					AdministradorABM abm=new AdministradorABM();
 					int status=0;
+					
+					
 					status=abm.darDeAlta(repa, "furlong", "reparacion");
+				
 					if(status==1){
 						JOptionPane.showMessageDialog(null, "Operación exitosa!");
 						metodosSql metodos=new metodosSql();

@@ -514,7 +514,10 @@ public class metodosSql extends ConexionMySql {
 		}*/
 		return status;
 	}
-
+/**
+ * Pone en estado en reparacion en la tabla HAND HELD
+ */
+	
 	public void actualizarEstadoRepararEnReparacion(){
 		try {
 			insertarOmodif("UPDATE HANDHELD SET ESTADO='EN REPARACION' WHERE SERIAL IN (SELECT SERIAL_DEL_EQUIPO FROM REPARACION);");
@@ -523,6 +526,10 @@ public class metodosSql extends ConexionMySql {
 		}
 	}
 	
+	/**
+	 * Pone en estado en ok en la tabla HAND HELD
+	 */
+		
 	public void actualizarEstadoRepararOk(){
 		try {
 			insertarOmodif("UPDATE HANDHELD SET ESTADO='OK' WHERE SERIAL NOT IN (SELECT SERIAL_DEL_EQUIPO FROM REPARACION);");

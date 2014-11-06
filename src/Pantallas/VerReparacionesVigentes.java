@@ -200,6 +200,7 @@ public class VerReparacionesVigentes extends JPanel {
 						JOptionPane.showMessageDialog(null,"Recibido, puede chequear en historial");
 						
 						metodos.actualizarEstadoRepararOk();
+						jButtonVerActuales.doClick();
 					}else{
 						JOptionPane.showMessageDialog(null,"Error, sigue en reparación");
 					}
